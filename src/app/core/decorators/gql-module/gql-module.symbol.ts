@@ -1,0 +1,1 @@
+export const GQLModuleSymbol = Symbol('annotations');

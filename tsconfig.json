@@ -1,0 +1,30 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "plugins": [
+      {
+        "name": "ts-graphql-plugin",
+        "schema": "./src/app/core/modules/graphql/schema.json",
+        "tag": "gql"
+      }
+    ],
+    "lib": [
+      "es2017",
+      "es2016",
+      "es6",
+      "dom",
+      "esnext.asynciterable"
+    ]
+  }
+}
