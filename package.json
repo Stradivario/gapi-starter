@@ -34,6 +34,7 @@
     "boom": "^5.2.0",
     "bunyan": "^1.8.12",
     "fse": "^4.0.0",
+    "gapi": "git+ssh://git@gitlab.youvolio.com:522/open-source/gapi.git",
     "gql2ts": "^1.4.0",
     "graphql": "^0.12.3",
     "graphql-rabbitmq-subscriptions": "^1.1.0",
@@ -53,8 +54,10 @@
     "sequelize-typescript": "^0.6.2",
     "socket.io": "^2.0.3",
     "subscriptions-transport-ws": "^0.9.4",
+    "ts-node": "^5.0.0",
     "tslint": "^5.8.0",
-    "tslint-language-service": "^0.9.8"
+    "tslint-language-service": "^0.9.8",
+    "typedi": "^0.7.0"
   },
   "devDependencies": {
     "@types/graphql": "^0.11.2",
@@ -67,7 +70,6 @@
     "pm2": "^2.6.1",
     "sequelize-cli": "^3.0.0",
     "ts-jest": "^22.0.1",
-    "ts-node": "^3.3.0",
     "typescript": "^2.7.1",
     "yargs": "^10.0.3"
   },

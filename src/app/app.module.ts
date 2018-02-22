@@ -1,18 +1,15 @@
-import { GQLModule, GQLController, TestenClass2 } from './core';
 
-@GQLController()
-export class TestenImport {
-    constructor(testenClass2: TestenClass2) {
-        this['testenClass2'].get()
-    }
-    public static dada() {
+import { GapiModule, GapiServerModule, Service } from 'gapi';
+import { CoffeMachineModule } from './coffe-machine/coffe-machine.module';
+import { UserModule } from './user/user.module';
 
-    }
-}
-
-@GQLModule({
+@GapiModule({
     imports: [
-        TestenImport
+        GapiServerModule.forRoot({
+            port: '5050'
+        }),
+        CoffeMachineModule,
+        UserModule
     ]
 })
-export class AppModule {}
+export class AppModule { }
