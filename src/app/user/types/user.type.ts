@@ -1,4 +1,4 @@
-import { GraphQLString, GraphQLObjectType } from "graphql";
+import { GraphQLString, GraphQLObjectType } from "gapi";
 
 export const UserType = new GraphQLObjectType({
     name: 'UserType',

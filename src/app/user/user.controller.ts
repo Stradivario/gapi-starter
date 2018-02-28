@@ -1,35 +1,30 @@
-import { GapiController, Container, Query, Mutation, Type, Scope, Args } from 'gapi';
-import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLInt } from 'graphql';
+import { GapiController, Container, Query, Mutation, Args, GraphQLString, GraphQLNonNull, GraphQLInt, GraphQLObjectTypeConfig, GraphQLObjectType } from 'gapi';
 import { UserType } from './types/user.type';
 
-@GapiController()
+@GapiController({
+    type: new GraphQLObjectType(<any>UserType),
+    scope: ['ADMIN', 'USER']
+})
 export class UserController {
-    constructor() {
-        console.log(this.findUser(1));
-    }
 
-    @Type(UserType)
-    @Scope('USER', 'ADMIN')
-    @Args({
+    @Query({
         id: new GraphQLNonNull(GraphQLInt)
     })
-    @Query
-    findUser(id) {
+    findUser(root, args, context: any) {
+        console.log('JUST ARGUMENTS', args);
         return Promise.resolve(1);
     }
 
-    @Type(UserType)
-    @Scope('USER', 'ADMIN')
     @Args({
         message: new GraphQLNonNull(GraphQLString),
         userId: new GraphQLNonNull(GraphQLInt),
         friendId: new GraphQLNonNull(GraphQLInt),
         email: new GraphQLNonNull(GraphQLString)
     })
-    @Mutation
-    deleteUser(root, { email, friendId, userId, message }, context: any) {
+    @Mutation()
+    deleteUser(root, payload, context: any): any {
         return Promise.resolve(1);
     }
 
 }
-Container.get(UserController);
+
