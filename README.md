@@ -1,12 +1,16 @@
+```typescript
+
 import { GapiController, Container, Query, Mutation, Args, GraphQLString, GraphQLNonNull, GraphQLInt, GraphQLObjectTypeConfig, GraphQLObjectType, Type, Scope, ControllerMappingSettings, ControllerMapping, GenericGapiResolversType } from 'gapi';
 import { UserType } from './types/user.type';
 import { TestService } from './services/test.service';
 import { Service } from 'gapi';
+import { Inject } from '../../../../gapi/node_modules/typedi';
 
 @GapiController({
-    scope: ['ADMIN'],
-    public: true
+    type: UserType,
+    scope: ['ADMIN', 'USER']
 })
+@Service()
 export class UserController implements GapiController {
 
     _controller_name: string;
@@ -15,10 +19,8 @@ export class UserController implements GapiController {
     _subscriptions: Map<string, GenericGapiResolversType>;
     _mutations: Map<string, GenericGapiResolversType>;
 
-    constructor(
-        public testService: TestService
-    ) {
-        console.log('EEEEEEEEEEEEEEEEEEE ', this);
+    constructor(@Inject(type => TestService) private testService: TestService) {
+        console.log(this.testService);
     }
 
     @Scope('ADMIN')
@@ -43,25 +45,18 @@ export class UserController implements GapiController {
         return Promise.resolve({id: 1, friendId: 2});
     }
 
-    @Scope('ADMIN')
-    @Type(UserType)
-    @Mutation({
-        message: {
-            type: new GraphQLNonNull(GraphQLString)
-        },
-        userId: {
-            type: new GraphQLNonNull(GraphQLInt),
-        },
-        friendId: {
-            type: new GraphQLNonNull(GraphQLInt),
-        },
-        email: {
-            type: new GraphQLNonNull(GraphQLString)
-        },
-    })
+    // @Args({
+    //     message: new GraphQLNonNull(GraphQLString),
+    //     userId: new GraphQLNonNull(GraphQLInt),
+    //     friendId: new GraphQLNonNull(GraphQLInt),
+    //     email: new GraphQLNonNull(GraphQLString)
+    // })
+    // @Mutation()
     deleteUser(root, payload, context: any): any {
         return Promise.resolve(1);
     }
 
 }
 
+
+```

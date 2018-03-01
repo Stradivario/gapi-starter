@@ -7,7 +7,7 @@
     "postinstall": "cp -r ./bash/lib/* ./node_modules/@gql2ts/ && rm -rf ./node_modules/graphql-rabbitmq-subscriptions/node_modules",
     "start:ts": "ts-node src/main.ts",
     "start": "npm run start:ts",
-    "start:watch":"nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/main.ts",
+    "start:watch":"nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ./src/main.ts",
     "start:force": "docker restart ganache-cli-tests && npm run truffle-migrate && npm run start:ts",
     "start:prod": "npm run truffle-migrate && pm2-docker process.yml --only APP",
     "lint": "tslint -c tslint.json 'graphql/**/*.{ts,tsx}'",
@@ -35,7 +35,7 @@
     "boom": "^5.2.0",
     "bunyan": "^1.8.12",
     "fse": "^4.0.0",
-    "gapi": "git+ssh://git@gitlab.youvolio.com:522/open-source/gapi.git",
+    "gapi": "git+http://git@gitlab.youvolio.com/open-source/gapi.git",
     "gql2ts": "^1.4.0",
     "graphql": "^0.13.1",
     "graphql-rabbitmq-subscriptions": "^1.1.0",
@@ -97,5 +97,9 @@
     "testRegex": "/graphql/.*\\.spec.(ts|tsx|js)$",
     "verbose": true,
     "collectCoverage": true
-  }
+  },
+  "nodemonConfig": {
+    "ignore": ["test/*", "docs/*"],
+    "delay": "1500"
+  }  
 }

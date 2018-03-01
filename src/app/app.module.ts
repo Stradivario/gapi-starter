@@ -2,10 +2,9 @@
 import { GapiModule, GapiServerModule, Service, SchemaService, Container, GraphQLObjectType, ControllerContainerService } from 'gapi';
 import { CoffeMachineModule } from './coffe-machine/coffe-machine.module';
 import { UserModule } from './user/user.module';
-import { readFileSync } from 'fs';
 import { UserController } from './user/user.controller';
-import { TicketModule } from './Ticket/ticket.module';
-import { TicketQuery } from './Ticket/index';
+import { TicketModule } from './ticket/ticket.module';
+import { readFileSync } from 'fs';
 
 @GapiModule({
     imports: [
