@@ -1,17 +1,11 @@
 import { TicketType } from './ticket.type';
-import { GraphQLID, GraphQLNonNull, GraphQLString, GraphQLInputObjectType, GraphQLInt, GraphQLList, GapiController, Type, Query, Scope } from 'gapi';
+import { GraphQLID, GraphQLNonNull, GraphQLString, GraphQLInputObjectType, GraphQLInt, GraphQLList, GapiController, Type, Query, Scope, Service } from 'gapi';
 
 @GapiController({
   type: TicketType,
   scope: ['ADMIN', 'USER']
 })
 export class TicketController {
-
-  constructor() {
-    setTimeout(() => {
-      console.log(this);
-    }, 5000)
-  }
   createTicket() {
     return {
       public: true,
@@ -65,8 +59,9 @@ export class TicketController {
     };
   }
 
-  @Type(new GraphQLList(TicketType))
+
   @Scope('ADMIN')
+  @Type(new GraphQLList(TicketType))
   @Query()
   listTickets(root, id, context) {
     return Promise.resolve([{id: 1}]);
