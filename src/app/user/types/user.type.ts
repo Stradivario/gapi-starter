@@ -1,13 +1,10 @@
-import { GraphQLString, GraphQLObjectType } from "gapi";
+import { GraphQLObjectType, GraphQLString, GraphQLInt } from "gapi";
 
 export const UserType = new GraphQLObjectType({
     name: 'UserType',
     fields: {
         id: {
-            type: GraphQLString
-        },
-        friendId: {
-            type: GraphQLString
+            type: GraphQLInt
         },
     }
 });

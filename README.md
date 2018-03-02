@@ -6,18 +6,8 @@ import { TestService } from './services/test.service';
 import { Service } from 'gapi';
 import { Inject } from '../../../../gapi/node_modules/typedi';
 
-@GapiController({
-    type: UserType,
-    scope: ['ADMIN', 'USER']
-})
-@Service()
+@GapiController()
 export class UserController implements GapiController {
-
-    _controller_name: string;
-    _settings: ControllerMappingSettings;
-    _queries: Map<string, GenericGapiResolversType>;
-    _subscriptions: Map<string, GenericGapiResolversType>;
-    _mutations: Map<string, GenericGapiResolversType>;
 
     constructor(@Inject(type => TestService) private testService: TestService) {
         console.log(this.testService);
