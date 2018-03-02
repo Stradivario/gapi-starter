@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ./src/main.ts",
+    "start": "gapi-cli start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -16,6 +16,7 @@
     "typescript": "^2.7.1"
   },
   "nodemonConfig": {
+    "delay": 1500,
     "ignore": [
       "test/*",
       "docs/*"
