@@ -1,52 +1,21 @@
-```typescript
+## This is basic example project related with GAPI graphQL api with typescript Decorators
 
-import { GapiController, Container, Query, Mutation, Args, GraphQLString, GraphQLNonNull, GraphQLInt, GraphQLObjectTypeConfig, GraphQLObjectType, Type, Scope, ControllerMappingSettings, ControllerMapping, GenericGapiResolversType } from 'gapi';
-import { UserType } from './types/user.type';
-import { TestService } from './services/test.service';
-import { Service } from 'gapi';
-import { Inject } from '../../../../gapi/node_modules/typedi';
+#### To start developing clone repository
 
-@GapiController()
-export class UserController implements GapiController {
+```bash
+git clone https://github.com/Stradivario/gapi-starter
+```
 
-    constructor(@Inject(type => TestService) private testService: TestService) {
-        console.log(this.testService);
-    }
+#### Better use command line utility(gapi-cli) to install it type following command:
 
-    @Scope('ADMIN')
-    @Type(UserType)
-    @Query({
-        id: {
-            type: new GraphQLNonNull(GraphQLString)
-        }
-    })
-    findUser(root, args, context: any) {
-        return Promise.resolve({id: 1, friendId: 2});
-    }
-    
-    @Scope('ADMIN')
-    @Type(UserType)
-    @Query({
-        id: {
-            type: new GraphQLNonNull(GraphQLString)
-        }
-    })
-    findUser2(root, args, context: any) {
-        return Promise.resolve({id: 1, friendId: 2});
-    }
-
-    // @Args({
-    //     message: new GraphQLNonNull(GraphQLString),
-    //     userId: new GraphQLNonNull(GraphQLInt),
-    //     friendId: new GraphQLNonNull(GraphQLInt),
-    //     email: new GraphQLNonNull(GraphQLString)
-    // })
-    // @Mutation()
-    deleteUser(root, payload, context: any): any {
-        return Promise.resolve(1);
-    }
-
-}
+```bash
+npm i -g gapi-cli
+```
 
 
+
+#### Type the following command to create new project from scratch via CLI
+
+```bash
+gapi-cli new my-project
 ```

@@ -1,5 +1,5 @@
 
-import { GapiModule, GapiServerModule } from 'gapi';
+import { GapiModule, GapiServerModule, ConfigService } from 'gapi';
 import { UserModule } from './user/user.module';
 import { UserService } from './user/services/user.service';
 
@@ -8,4 +8,4 @@ import { UserService } from './user/services/user.service';
         UserModule
     ]
 })
-export class AppModule {}
+export class AppModule { }

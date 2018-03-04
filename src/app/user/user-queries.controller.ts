@@ -1,10 +1,11 @@
-import { Query, GraphQLNonNull, Scope, Type, GraphQLObjectType, Mutation, GapiController, Service, GraphQLInt, Inject } from "gapi";
+import { Query, GraphQLNonNull, Scope, Type, GraphQLObjectType, Mutation, GapiController, Service, GraphQLInt, Inject, Container } from "gapi";
 import { UserService } from './services/user.service';
 import { UserType } from './types/user.type';
 
 @GapiController()
 export class UserQueriesController {
-    @Inject() userService: UserService;
+
+    private userService: UserService = Container.get(UserService);
 
     @Scope('ADMIN')
     @Type(UserType)
@@ -14,8 +15,11 @@ export class UserQueriesController {
         }
     })
     findUser(root, { id }, context) {
-        console.log(this);
-        return UserService.findUser(id);
+        return this.userService.findUser(id);
     }
 
 }
+
+
+
+

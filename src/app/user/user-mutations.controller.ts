@@ -1,9 +1,11 @@
-import { Query, GraphQLNonNull, Scope, Type, GraphQLObjectType, Mutation, GapiController, Service, GraphQLInt } from "gapi";
+import { Query, GraphQLNonNull, Scope, Type, GraphQLObjectType, Mutation, GapiController, Service, GraphQLInt, Container } from "gapi";
 import { UserService } from './services/user.service';
 import { UserType } from './types/user.type';
 
 @GapiController()
 export class UserMutationsController {
+
+    private userService: UserService = Container.get(UserService);
 
     @Scope('ADMIN')
     @Type(UserType)
@@ -13,7 +15,7 @@ export class UserMutationsController {
         }
     })
     deleteUser(root, { id }, context) {
-        return UserService.deleteUser(id);
+        return this.userService.deleteUser(id);
     }
 
     @Scope('ADMIN')
@@ -24,7 +26,7 @@ export class UserMutationsController {
         }
     })
     updateUser(root, { id }, context) {
-        return UserService.updateUser(id);
+        return this.userService.updateUser(id);
     }
 
     @Scope('ADMIN')
@@ -35,7 +37,7 @@ export class UserMutationsController {
         }
     })
     addUser(root, { id }, context) {
-        return UserService.addUser(id);
+        return this.userService.addUser(id);
     }
 
 }

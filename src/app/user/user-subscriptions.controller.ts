@@ -1,17 +1,14 @@
-import { Query, GraphQLNonNull, Scope, Type, GraphQLObjectType, Mutation, GapiController, Service } from "gapi";
+import { Query, GraphQLNonNull, Scope, Type, GraphQLObjectType, Mutation, GapiController, Service, Container } from "gapi";
 import { UserService } from './services/user.service';
 import { UserType } from './types/user.type';
 
 @GapiController()
 export class UserSubscriptionsController {
 
-    constructor(
-        private userService: UserService
-    ) {}
+    private userService: UserService = Container.get(UserService);
 
-    // Todo Subscriptions decorators
     subscribeToUserUpdates() {
-        return UserService.subscribeToUserUpdates();
+        return this.userService.subscribeToUserUpdates();
     }
 
 }

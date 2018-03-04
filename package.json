@@ -1,5 +1,5 @@
 {
-  "name": "dadada",
+  "name": "gapi-starter",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,16 +10,20 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "gapi": "git+http://gitlab.youvolio.com/open-source/gapi.git",
+    "gapi": "github:Stradivario/gapi",
     "rxjs": "^5.5.6",
-    "ts-node": "^5.0.1",
     "typescript": "^2.7.1"
   },
   "nodemonConfig": {
-    "delay": 1500,
     "ignore": [
       "test/*",
       "docs/*"
-    ]
+    ],
+    "verbose": true,
+    "exec": "ts-node server/server.app.ts",
+    "watch": [
+      "server"
+    ],
+    "ext": "ts"
   }
 }
