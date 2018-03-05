@@ -1,18 +1,13 @@
 
-import { GapiModule, GapiServerModule, ConfigService } from 'gapi';
+import { GapiModule, GapiServerModule } from 'gapi';
 import { UserModule } from './user/user.module';
 import { UserService } from './user/services/user.service';
+import { CoreModule } from './core/core.module';
 
 @GapiModule({
     imports: [
-        UserModule
-    ],
-    services: [
-        ConfigService.forRoot({
-            APP_CONFIG: {
-                port: 8200
-            }
-        })
+        UserModule,
+        CoreModule
     ]
 })
 export class AppModule { }

@@ -7,7 +7,6 @@ export class UserQueriesController {
 
     @Injector(UserService) private userService: UserService;
 
-    @Scope('ADMIN')
     @Type(UserObjectType)
     @Query({
         id: {
