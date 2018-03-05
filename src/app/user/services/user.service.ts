@@ -1,7 +1,7 @@
 import { Service } from "gapi";
 
 @Service()
-class AnotherService {
+export class AnotherService {
     trimFirstLetter(username: string) {
         return username.charAt(1);
     }
