@@ -1,25 +1,15 @@
 import { GraphQLObjectType, GraphQLString, GraphQLInt, GapiObjectType, Type, Resolve } from "gapi";
 import { GraphQLScalarType } from "graphql";
-
-@GapiObjectType()
-export class UserSettings {
-    username: string | GraphQLScalarType = GraphQLString;
-    firstname: string | GraphQLScalarType = GraphQLString;
-
-    @Resolve('username')
-    getUsername?(root, payload, context) {
-        return 'username-changed';
-    }
-}
+import { UserSettings, UserSettingsObjectType } from './user.settings';
 
 @GapiObjectType()
 export class UserType {
-    id: number | GraphQLScalarType = GraphQLInt;
-    settings: string | UserSettings = new UserSettings();
+    readonly id: number | GraphQLScalarType = GraphQLInt;
+    readonly settings: string | UserSettings = UserSettingsObjectType;
     
     @Resolve('id')
     getId?(root, payload, context) {
-        return 5;
+        return 1;
     }
 }
 
