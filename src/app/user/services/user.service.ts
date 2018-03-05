@@ -1,8 +1,9 @@
 import { Service } from "gapi";
+import { UserType } from "../types/user.type";
 
 @Service()
 export class AnotherService {
-    trimFirstLetter(username: string) {
+    trimFirstLetter(username: string): string {
         return username.charAt(1);
     }
 }
@@ -13,25 +14,40 @@ export class UserService {
         private anotherService: AnotherService
     ) {}
 
-    findUser(id: number) {
-        return { id: 1 };
+    findUser(id: number): UserType {
+        return { id: 1, settings: {
+            firstname: 'pesho',
+            username: 'gosho'
+        }};
     }
 
-    addUser(id: number) {
+    addUser(id: number): UserType {
         const username = this.anotherService.trimFirstLetter('username');
-        return { id: 1, username };
+        return { id: 1, settings: {
+            firstname: 'pesho',
+            username: 'gosho'
+        }};
     }
 
     deleteUser(id: number) {
-        return { id: 1 };
+        return { id: 1, settings: {
+            firstname: 'pesho',
+            username: 'gosho'
+        }};
     }
 
-    updateUser(id) {
-        return { id: 1 };
+    updateUser(id): UserType  {
+        return { id: 1, settings: {
+            firstname: 'pesho',
+            username: 'gosho'
+        }};
     }
 
-    subscribeToUserUpdates() {
-        return { id: 1 };
+    subscribeToUserUpdates(): UserType {
+        return { id: 1, settings: {
+            firstname: 'pesho',
+            username: 'gosho'
+        }};
     }
 
 }
