@@ -1,5 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GapiObjectType, Type, Resolve, Injector } from "gapi";
-import { GraphQLScalarType } from "graphql";
+import { GraphQLObjectType, GraphQLString, GraphQLInt, GapiObjectType, Type, Resolve, Injector, GraphQLScalarType } from "gapi";
 import { AnotherService } from "../services/user.service";
 
 
@@ -14,11 +13,6 @@ export class UserSettings {
     @Resolve('username')
     async getUsername?(root, payload, context) {
         return await this.anotherService.trimFirstLetterAsync(root.username);
-    }
-
-    @Resolve('firstname')
-    getFirstname?(root, payload, context) {
-        return 'firstname-changed';
     }
 
 }

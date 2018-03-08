@@ -1,4 +1,4 @@
-## This is basic example project related with GAPI graphQL api with typescript Decorators
+## This is basic example project related with [GAPI](https://github.com/Stradivario/gapi) graphQL api with typescript Decorators
 
 #### To start developing clone repository
 

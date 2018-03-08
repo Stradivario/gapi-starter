@@ -33,7 +33,7 @@ export class UserService {
         }};
     }
 
-    deleteUser(id: number) {
+    deleteUser(id: number): UserType {
         return { id: 1, settings: {
             firstname: 'pesho',
             username: 'gosho'
@@ -41,13 +41,6 @@ export class UserService {
     }
 
     updateUser(id): UserType  {
-        return { id: 1, settings: {
-            firstname: 'pesho',
-            username: 'gosho'
-        }};
-    }
-
-    subscribeToUserUpdates(): UserType {
         return { id: 1, settings: {
             firstname: 'pesho',
             username: 'gosho'
