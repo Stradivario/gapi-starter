@@ -19,3 +19,29 @@ npm i -g gapi-cli
 ```bash
 gapi-cli new my-project
 ```
+
+
+
+#### To start project for "development" type:
+
+```bash
+npm start
+```
+
+#### To start project for "production" type:
+This will run pm2-docker process.yml --only APP (check process.yml inside root repository)
+```bash
+npm run start:prod
+```
+
+### Docker
+
+#### To build project with Docker type:
+```bash
+npm run build:docker
+```
+
+#### To start project with Docker type:
+```bash
+npm run start:docker
+```

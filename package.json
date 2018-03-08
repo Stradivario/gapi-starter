@@ -5,12 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "gapi-cli start",
+    "start:prod": "pm2-docker process.yml --only APP",
+    "start:docker": "docker-compose up --force-recreate",
+    "stop:docker": "docker stop gapi-api-prod",
+    "build:docker": "docker build -t gapi/api/master .",
+    "tsc": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "gapi": "github:Stradivario/gapi",
+    "pm2-docker": "^2.1.0",
     "rxjs": "^5.5.6",
     "typescript": "^2.7.1"
   },
