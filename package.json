@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "gapi-cli start",
-    "start:prod": "pm2-docker process.yml --only APP",
-    "start:docker": "docker-compose -p gapi-api-prod up --force-recreate",
-    "stop:docker": "docker stop gapi-api-prod",
-    "build:docker": "docker build -t gapi/api/prod .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:prod": "gapi-cli start --prod",
+    "start:docker": "gapi-cli docker start",
+    "stop:docker": "gapi-cli docker stop",
+    "build:docker": "gapi-cli docker build"
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",
