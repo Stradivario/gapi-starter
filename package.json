@@ -6,6 +6,7 @@
   "scripts": {
     "start": "gapi-cli start",
     "start:prod": "gapi-cli start --prod",
+    "stop:prod": "gapi-cli stop --prod",
     "start:docker": "gapi-cli docker start",
     "stop:docker": "gapi-cli docker stop",
     "build:docker": "gapi-cli docker build"

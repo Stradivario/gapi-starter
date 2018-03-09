@@ -1,4 +1,8 @@
-## This is basic example project related with [GAPI](https://github.com/Stradivario/gapi) graphQL api with typescript Decorators
+# @Gapi Basic Starter 
+##### @Nginx, @Rabbitmq, @Postgres, @Sequelize, @Docker, @Graphql
+
+## This is basic example project related with [GAPI](https://github.com/Stradivario/gapi)
+## To check advanced example project go to [advanced-example](https://github.com/Stradivario/gapi-starter-postgres-sequelize-rabbitmq)
 
 #### To start developing clone repository
 
@@ -34,6 +38,7 @@ This will run pm2-docker process.yml --only APP (check process.yml inside root r
 npm run start:prod
 ```
 
+
 ### Docker
 
 #### To build project with Docker type:
@@ -44,6 +49,11 @@ npm run build:docker
 #### To start project with Docker type:
 ```bash
 npm run start:docker
+```
+
+#### To stop project type:
+```bash
+npm run stop:docker
 ```
 
 ###### You can check docker-compose file to configurate environment variables
@@ -101,6 +111,19 @@ services:
       default:
         ipv4_address: 182.10.0.3
 
+  rabbitmq:
+    image: rabbitmq:3.7.2
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "5671:5671"
+      - "4369:4369"
+    restart: always
+    container_name: gapi-api-rabbitmq
+    networks:
+      default:
+        ipv4_address: 182.10.0.5
+
 networks:
   default:
     driver: bridge
@@ -108,6 +131,7 @@ networks:
      config:
        - subnet: 182.10.0.0/16
          gateway: 182.10.0.1
+
 
 ```
 

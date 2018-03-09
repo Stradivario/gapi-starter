@@ -13,4 +13,4 @@ RUN npm install
 
 COPY . .
 
-CMD [ "npm", "run", "start:prod" ]
+CMD [ "gapi-cli", "start", "--prod", "--docker" ]
