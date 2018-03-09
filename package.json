@@ -6,13 +6,12 @@
   "scripts": {
     "start": "gapi-cli start",
     "start:prod": "pm2-docker process.yml --only APP",
-    "start:docker": "docker-compose up --force-recreate",
+    "start:docker": "docker-compose -p gapi-api-prod up --force-recreate",
     "stop:docker": "docker stop gapi-api-prod",
-    "build:docker": "docker build -t gapi/api/master .",
-    "tsc": "tsc",
+    "build:docker": "docker build -t gapi/api/prod .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
     "gapi": "github:Stradivario/gapi",
