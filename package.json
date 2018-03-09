@@ -20,13 +20,12 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "test/*",
-      "docs/*"
+      "./src/**/*.spec.ts"
     ],
     "verbose": true,
-    "exec": "ts-node server/server.app.ts",
+    "exec": "ts-node ./src/main.ts",
     "watch": [
-      "server"
+      "./src/**/*.ts"
     ],
     "ext": "ts"
   }
