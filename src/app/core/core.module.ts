@@ -6,10 +6,6 @@ import { readFileSync } from 'fs';
 @GapiModule({
     services: [
         ConfigService.forRoot({
-            AMQP_CONFIG: {
-                host: '182.10.0.5',
-                port: 5672
-            },
             APP_CONFIG: {
                 port: process.env.API_PORT || 9000,
                 cert: readFileSync('./cert.key'),
