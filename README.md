@@ -83,23 +83,16 @@ services:
       - NODE_ENV=production
       - API_PORT=9000
       - GRAPHIQL_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhNGVuc3RvcmVAZ21haWwuY29tIiwic2NvcGUiOlsiQURNSU4iXSwiaWQiOjIsImlhdCI6MTUxMTk3NDkzNX0.M9PnW2IrVp4XGRvbzFrl0tx6vqs6oXItFK-wF5roneI
-      - AMQP_HOST=172.10.0.4
+      - AMQP_HOST=182.10.0.5
       - AMQP_PORT=5672
       - CERT_PATH=
 
-      # Local db config
-      - DB_HOST=172.10.0.10
+      # Production db config
+      - DB_HOST=182.10.0.4
       - DB_PORT=5432
-      - DB_NAME=antitheft
+      - DB_NAME=postgres
       - DB_USERNAME=dbuser
       - DB_PASSWORD=dbuserpass
-      
-      # Production db config
-      - DB_HOST_PROD=yourPostgressAWSaddress.ckffxbb4tx38.us-east-2.rds.amazonaws.com
-      - DB_PORT_PROD=5432
-      - DB_NAME_PROD=postgres
-      - DB_USERNAME_PROD=dbuser
-      - DB_PASSWORD_PROD=dbuserpass
 
     restart: always
     mem_limit: 1000000000
