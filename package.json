@@ -7,9 +7,11 @@
     "start": "gapi-cli start",
     "start:prod": "gapi-cli start --prod",
     "stop:prod": "gapi-cli stop --prod",
-    "start:docker": "gapi-cli docker start",
-    "stop:docker": "gapi-cli docker stop",
-    "build:docker": "gapi-cli docker build"
+    "start:docker": "gapi-cli app start",
+    "stop:docker": "gapi-cli app stop",
+    "build:docker": "gapi-cli app build",
+    "start:workers": "gapi-cli workers start",
+    "stop:workers": "gapi-cli workers stop"
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",
