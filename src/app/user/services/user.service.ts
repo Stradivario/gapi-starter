@@ -1,5 +1,5 @@
-import { Service } from "gapi";
-import { UserType } from "../types/user.type";
+import { Service } from 'gapi';
+import { UserType } from '../types/user.type';
 
 @Service()
 export class AnotherService {

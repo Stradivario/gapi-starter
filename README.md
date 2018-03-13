@@ -23,7 +23,7 @@ npm i -g gapi-cli
 #### Type the following command to create new project from scratch via CLI
 
 ```bash
-gapi-cli new my-project
+gapi new my-project
 ```
 
 
@@ -52,17 +52,17 @@ npm run stop:prod
 
 #### To build project with Docker type:
 ```bash
-gapi-cli app build
+gapi app build
 ```
 
 #### To start project with Docker type:
 ```bash
-gapi-cli app start
+gapi app start
 ```
 
 #### To stop project type:
 ```bash
-gapi-cli app stop
+gapi app stop
 ```
 
 ### Workers
@@ -72,12 +72,12 @@ gapi-cli app stop
 
 #### To start workers type:
 ```bash
-gapi-cli workers start
+gapi workers start
 ```
 
 #### To stop workers type:
 ```bash
-gapi-cli workers stop
+gapi workers stop
 ```
 
 ###### To add more workers
@@ -161,35 +161,69 @@ server {
 ```
 
 ###### When you add another worker it should be on different IP with same port 9000
-###### Open root/gapi-cli.conf.yml file you will find this file:
+###### Open root/gapi.conf.yml file you will find this file:
 
 ```yml
-
 commands:
+  
+  testing:
+    stop: 'docker rm -f gapi-api-prod-worker-tests-executor && docker rm -f gapi-api-prod-worker-tests-provider'
+    start: 'gapi testing start-provider && sleep 10 && gapi testing start-executor && echo Cleaning... && gapi testing stop'
+    start-executor: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.100 --name gapi-api-prod-worker-tests-executor gapi/api/prod && docker exec gapi-api-prod-worker-tests-provider npm -v && gapi test --worker --before'
+    start-provider: 'docker run -e DB_HOST=182.10.0.99 -e DB_NAME=postgres -d --network=gapiapiprod_gapi --ip=182.10.0.101 --name gapi-api-prod-worker-tests-provider gapi/api/prod'
+  
   workers:
-    start: 'gapi-cli workers start-1 && gapi-cli workers start-2 && gapi-cli workers start-3 && gapi-cli workers start-4'
+    start: 'gapi workers start-1 && gapi workers start-2 && gapi workers start-3 && gapi workers start-4'
     stop: 'docker rm -f gapi-api-prod-worker-1 && docker rm -f gapi-api-prod-worker-2 && docker rm -f gapi-api-prod-worker-3 && docker rm -f gapi-api-prod-worker-4'
     start-1: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.21 --name gapi-api-prod-worker-1 -p 9001:9000 gapi/api/prod'
     start-2: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.22 --name gapi-api-prod-worker-2 -p 9002:9000 gapi/api/prod'
     start-3: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.23 --name gapi-api-prod-worker-3 -p 9003:9000 gapi/api/prod'
     start-4: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.24 --name gapi-api-prod-worker-4 -p 9004:9000 gapi/api/prod'
     example-worker-with-port: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.25 --name gapi-api-prod-worker-5 -p 9001:9000 gapi/api/prod'
-  app: 
-    start: 'docker-compose -p gapi-api-prod up --force-recreate'
-    stop: 'docker rm -f gapi-api-nginx && docker rm -f gapi-api-prod && docker rm -f gapi-api-rabbitmq'
+  
+  app:
+    start: 'docker-compose -p gapi-api-prod up --force-recreate -d && gapi rabbitmq enable-dashboard'
+    stop: 'gapi nginx stop && gapi api stop && gapi rabbitmq stop && gapi postgres stop'
     build: 'docker build -t gapi/api/prod .'
-    rm-app: 'docker rm -f gapi-api-nginx && docker rm -f gapi-api-prod && docker rm -f gapi-api-rabbitmq'
+
+  api:
+    stop: 'docker rm -f gapi-api-prod'
+
+  nginx:
+    stop: 'docker rm -f gapi-api-nginx'
+
+  postgres:
+    stop: 'docker rm -f gapi-api-postgres'
+
   rabbitmq:
+    stop: 'docker rm -f gapi-api-rabbitmq'
     enable-dashboard: 'docker exec gapi-api-rabbitmq rabbitmq-plugins enable rabbitmq_management'
 
-  # To run these commands you need to type "gapi-cli docker start|stop|build|worker1|worker2|worker3|etc"
+config:
+  test:
+    local:
+      db_port: '5432'
+      db_host: '182.10.0.4'
+      db_user: 'dbuser'
+      db_pass: 'dbuserpass'
+      db_name: 'postgres'
+      endpoint: 'http://localhost:9000/graphql'
+    worker:
+      db_port: '5432'
+      db_host: '182.10.0.99'
+      db_user: 'dbuser'
+      db_pass: 'dbuserpass'
+      db_name: 'postgres'
+      endpoint: 'http://182.10.0.101:9000/graphql'
+
+
+  # To run these commands you need to type "gapi docker start|stop|build|worker1|worker2|worker3|etc"
   
   # You can define your custom commands for example 
   # commands:
   #   your-cli:
   #     my-command: 'npm -v'
-  # This command can be executed as "gapi-cli your-cli my-command"
-
+  # This command can be executed as "gapi your-cli my-command"
 ```
 ###### Adding one more worker:
 ```yml
@@ -197,7 +231,7 @@ start-5: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.25 --name gapi-
 ```
 ###### Then edit start task inside workers to start new worker 5 
 ```yml
-start: 'gapi-cli workers start-1 && gapi-cli workers start-2 && gapi-cli workers start-3 && gapi-cli workers start-4 & gapi-cli workers start-5'
+start: 'gapi workers start-1 && gapi workers start-2 && gapi workers start-3 && gapi workers start-4 & gapi workers start-5'
 ```
 
 ###### Thats' it!! Now you have 4 processes like CLUSTERS inside 1 docker container with ip 182.10.0.25 and external port(optional) 9005;
@@ -223,7 +257,6 @@ start-5: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.25 --name gapi-
 
 ###### You can check docker-compose file to configurate environment variables
 ```yml
-
 version: '2'
 services:
 
@@ -237,6 +270,7 @@ services:
       - ./nginx/html:/usr/share/nginx/html/
       - ./nginx/certs:/usr/share/certs
     restart: always
+    container_name: gapi-api-nginx
     networks:
       gapi:
         ipv4_address: 182.10.0.2
@@ -244,7 +278,7 @@ services:
   api:
     image: gapi/api/prod:latest
     ports:
-      - "9000:9000"
+      - "9000"
     environment:
       - NODE_ENV=production
       - API_PORT=9000
@@ -266,11 +300,12 @@ services:
     container_name: gapi-api-prod
     depends_on:
       - nginx
+      - rabbitMq
     networks:
       gapi:
         ipv4_address: 182.10.0.3
 
-  rabbitmq:
+  rabbitMq:
     image: rabbitmq:3.7.2
     ports:
       - "15672:15672"

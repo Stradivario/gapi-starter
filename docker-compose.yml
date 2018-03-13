@@ -4,8 +4,8 @@ services:
   nginx:
     image: sameersbn/nginx:1.10.1-5
     ports:
-      - "80:80"
-      - "443:443"
+      - "81:80"
+      - "444:443"
     volumes:
       - ./nginx/config:/etc/nginx
       - ./nginx/html:/usr/share/nginx/html/
@@ -19,7 +19,7 @@ services:
   api:
     image: gapi/api/prod:latest
     ports:
-      - "9000:9000"
+      - "9000"
     environment:
       - NODE_ENV=production
       - API_PORT=9000

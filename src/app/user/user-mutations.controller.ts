@@ -1,7 +1,7 @@
-import { Query, GraphQLNonNull, Scope, Type, GraphQLObjectType, Mutation, GapiController, Service, GraphQLInt, Container, Injector, GapiPubSubService, GraphQLString } from "gapi";
+import { Query, GraphQLNonNull, Scope, Type, GraphQLObjectType, Mutation, GapiController, Service, GraphQLInt, Container, Injector, GapiPubSubService, GraphQLString } from 'gapi';
 import { UserService } from './services/user.service';
 import { UserObjectType, UserType } from './types/user.type';
-import { UserMessage, UserMessageType } from "./types/user-message.type";
+import { UserMessage, UserMessageType } from './types/user-message.type';
 
 @GapiController()
 export class UserMutationsController {
