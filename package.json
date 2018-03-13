@@ -11,7 +11,8 @@
     "stop:docker": "gapi-cli app stop",
     "build:docker": "gapi-cli app build",
     "start:workers": "gapi-cli workers start",
-    "stop:workers": "gapi-cli workers stop"
+    "stop:workers": "gapi-cli workers stop",
+    "test": "dir"
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",

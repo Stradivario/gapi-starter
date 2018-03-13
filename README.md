@@ -1,3 +1,5 @@
+![Build Status](http://gitlab.youvolio.com/gapi/gapi-starter/badges/master/build.svg)
+
 # @Gapi Basic Starter 
 ##### @Nginx, @Rabbitmq, @Postgres, @Sequelize, @Docker, @Graphql
 

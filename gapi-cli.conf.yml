@@ -8,7 +8,7 @@ commands:
     start-4: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.24 --name gapi-api-prod-worker-4 -p 9004:9000 gapi/api/prod'
     example-worker-with-port: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.25 --name gapi-api-prod-worker-5 -p 9001:9000 gapi/api/prod'
   app: 
-    start: 'docker-compose -p gapi-api-prod up --force-recreate'
+    start: 'docker-compose -p gapi-api-prod up --force-recreate -d'
     stop: 'docker rm -f gapi-api-nginx && docker rm -f gapi-api-prod && docker rm -f gapi-api-rabbitmq'
     build: 'docker build -t gapi/api/prod .'
     rm-app: 'docker rm -f gapi-api-nginx && docker rm -f gapi-api-prod && docker rm -f gapi-api-rabbitmq'
