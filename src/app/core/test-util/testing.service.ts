@@ -47,7 +47,7 @@ export class AtcTestUtil {
     }
 
     enableAuthorization() {
-        this.tester = tester({ url: process.env.ENDPOINT_TESTING, contentType: 'application/json', authorization: process.env.TOKEN});
+        this.tester = tester({ url: process.env.ENDPOINT_TESTING, contentType: 'application/json', authorization: process.env.TOKEN_TESTING});
     }
 
     sendRequest<T>(query: SendRequestQueryType): Observable<Response<T>> {

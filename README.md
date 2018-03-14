@@ -45,10 +45,54 @@ Following command will stop pm2 processes started
 npm run stop:prod
 ```
 
+
+### Testing
+
+###### To start developing with testing GAPI uses JEST and gapi-cli is preconfigurated for your needs! :)
+
+#### To run single test type:
+```bash
+gapi test
+```
+
+#### Testing watch mode
+###### Note: You need to start server before running tests 
+###### Note: Everytime you make change to server it will restart server and execute tests
+###### Note: To add more tests just create e2e.spec.ts or unit.spec.ts somewhere inside the application
+
+##### Start the application
+```bash
+gapi start
+```
+##### Execute test with --watch argument
+```bash
+gapi test --watch
+```
+###### You will end up with something like this
+ ![Alt Text](https://raw.githubusercontent.com/Stradivario/gapi/master/images/sidebyside.png)
+
+#### Custom logic before testing ( for example creating MOCK users to database before testing)
+
+##### Create file test.ts inside root/src/test.ts with this content
+##### Everytime you run test with --before argument it will set environment variable BEFORE_HOOK
+```typescript
+  if (process.env.BEFORE_HOOK) {
+    // do something here
+  }
+```
+
+##### Then execute tests with --before
+```bash
+gapi test --before
+```
+
+###### This command will start root/src/test.ts file and will wait for process.exit(0) so you can customize your before logic check [this](https://github.com/Stradivario/gapi-starter-postgres-sequelize-rabbitmq/blob/master/src/test.ts#L73) link for reference
+
+### Docker
+
 ###### Following commands will start RabbitMQ, PostgreSQL, API, NGINX as a services you need DOCKER for them
 ###### API will be served on https://localhost:80 and https://localhost:80/subscriptions
 
-### Docker
 
 #### To build project with Docker type:
 ```bash
@@ -164,66 +208,107 @@ server {
 ###### Open root/gapi.conf.yml file you will find this file:
 
 ```yml
+config:
+# Application configuration
+  app: 
+    local:
+      API_PORT: 9000
+      API_CERT: ./cert.key
+      NODE_ENV: development
+      AMQP_HOST: 182.10.0.5
+      AMQP_PORT: 5672
+      GRAPHIQL: true
+      GRAPHIQL_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJpZCI6MSwic2NvcGUiOlsiQURNSU4iXSwiaWF0IjoxNTIwMjkxMzkyfQ.9hpIDPkSiGvjTmUEyg_R_izW-ra2RzzLbe3Uh3IFsZg
+    prod:
+      API_PORT: 9000
+      API_CERT: ./cert.key
+      NODE_ENV: production
+      AMQP_HOST: 182.10.0.5
+      AMQP_PORT: 5672
+# Testing configuration for local(dev) or worker(running tests as a separate worker with separate environment)
+  test: 
+    local:
+      API_PORT: 9000
+      API_CERT: ./cert.key
+      NODE_ENV: development
+      AMQP_HOST: 182.10.0.5
+      AMQP_PORT: 5672
+      ENDPOINT_TESTING: http://localhost:9000/graphql
+      TOKEN_TESTING: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJzY29wZSI6WyJBRE1JTiJdLCJpZCI6MSwiaWF0IjoxNTE2OTk2MzYxfQ.7ANr5VHrViD3NkCaDr0nSWYwk46UAEbOwB52pqye4AM
+    worker:
+      API_PORT: 9000
+      API_CERT: ./cert.key
+      NODE_ENV: production
+      AMQP_HOST: 182.10.0.5
+      AMQP_PORT: 5672
+      ENDPOINT_TESTING: http://182.10.0.101:9000/graphql
+      TOKEN_TESTING: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJzY29wZSI6WyJBRE1JTiJdLCJpZCI6MSwiaWF0IjoxNTE2OTk2MzYxfQ.7ANr5VHrViD3NkCaDr0nSWYwk46UAEbOwB52pqye4AM
+
 commands:
-  
+
   testing:
-    stop: 'docker rm -f gapi-api-prod-worker-tests-executor && docker rm -f gapi-api-prod-worker-tests-provider'
-    start: 'gapi testing start-provider && sleep 10 && gapi testing start-executor && echo Cleaning... && gapi testing stop'
-    start-executor: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.100 --name gapi-api-prod-worker-tests-executor gapi/api/prod && docker exec gapi-api-prod-worker-tests-provider npm -v && gapi test --worker --before'
-    start-provider: 'docker run -e DB_HOST=182.10.0.99 -e DB_NAME=postgres -d --network=gapiapiprod_gapi --ip=182.10.0.101 --name gapi-api-prod-worker-tests-provider gapi/api/prod'
-  
+    stop:
+      - docker rm -f gapi-api-prod-worker-tests-executor
+      - docker rm -f gapi-api-prod-worker-tests-provider
+    start:
+      - gapi testing start-provider
+      - sleep 10
+      - gapi testing start-executor
+      - echo Cleaning...
+      - gapi testing stop
+    start-provider: docker run -d --network=gapiapiprod_gapi --ip=182.10.0.101 --name gapi-api-prod-worker-tests-provider gapi/api/prod
+    start-executor:
+      - docker run -d --network=gapiapiprod_gapi --ip=182.10.0.100 --name gapi-api-prod-worker-tests-executor gapi/api/prod
+      - docker exec gapi-api-prod-worker-tests-provider npm -v
+      - gapi test --worker --before
+
   workers:
-    start: 'gapi workers start-1 && gapi workers start-2 && gapi workers start-3 && gapi workers start-4'
-    stop: 'docker rm -f gapi-api-prod-worker-1 && docker rm -f gapi-api-prod-worker-2 && docker rm -f gapi-api-prod-worker-3 && docker rm -f gapi-api-prod-worker-4'
-    start-1: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.21 --name gapi-api-prod-worker-1 -p 9001:9000 gapi/api/prod'
-    start-2: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.22 --name gapi-api-prod-worker-2 -p 9002:9000 gapi/api/prod'
-    start-3: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.23 --name gapi-api-prod-worker-3 -p 9003:9000 gapi/api/prod'
-    start-4: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.24 --name gapi-api-prod-worker-4 -p 9004:9000 gapi/api/prod'
-    example-worker-with-port: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.25 --name gapi-api-prod-worker-5 -p 9001:9000 gapi/api/prod'
-  
+    start:
+      - gapi workers start-1
+      - gapi workers start-2
+      - gapi workers start-3
+      - gapi workers start-4
+    stop:
+      - docker rm -f gapi-api-prod-worker-1
+      - docker rm -f gapi-api-prod-worker-2
+      - docker rm -f gapi-api-prod-worker-3
+      - docker rm -f gapi-api-prod-worker-4
+    start-1: docker run -d --network=gapiapiprod_gapi --ip=182.10.0.21 --name gapi-api-prod-worker-1 gapi/api/prod
+    start-2: docker run -d --network=gapiapiprod_gapi --ip=182.10.0.22 --name gapi-api-prod-worker-2 gapi/api/prod
+    start-3: docker run -d --network=gapiapiprod_gapi --ip=182.10.0.23 --name gapi-api-prod-worker-3 gapi/api/prod
+    start-4: docker run -d --network=gapiapiprod_gapi --ip=182.10.0.24 --name gapi-api-prod-worker-4 gapi/api/prod
+    example-worker-with-port: docker run -d --network=gapiapiprod_gapi --ip=182.10.0.25 --name gapi-api-prod-worker-5 -p 9001:9000 gapi/api/prod
+
   app:
-    start: 'docker-compose -p gapi-api-prod up --force-recreate -d && gapi rabbitmq enable-dashboard'
-    stop: 'gapi nginx stop && gapi api stop && gapi rabbitmq stop && gapi postgres stop'
-    build: 'docker build -t gapi/api/prod .'
+    start:
+      - docker-compose -p gapi-api-prod up --force-recreate -d
+      - gapi rabbitmq enable-dashboard
+    stop:
+      - gapi nginx stop
+      - gapi api stop
+      - gapi rabbitmq stop
+      - gapi postgres stop
+    build: docker build -t gapi/api/prod .
 
   api:
-    stop: 'docker rm -f gapi-api-prod'
+    stop: docker rm -f gapi-api-prod
 
   nginx:
-    stop: 'docker rm -f gapi-api-nginx'
+    stop: docker rm -f gapi-api-nginx
 
   postgres:
-    stop: 'docker rm -f gapi-api-postgres'
+    stop: docker rm -f gapi-api-postgres
 
   rabbitmq:
-    stop: 'docker rm -f gapi-api-rabbitmq'
-    enable-dashboard: 'docker exec gapi-api-rabbitmq rabbitmq-plugins enable rabbitmq_management'
+    stop: docker rm -f gapi-api-rabbitmq
+    restart: docker restart gapi-api-rabbitmq
+    enable-dashboard: docker exec gapi-api-rabbitmq rabbitmq-plugins enable rabbitmq_management
 
-config:
-  test:
-    local:
-      db_port: '5432'
-      db_host: '182.10.0.4'
-      db_user: 'dbuser'
-      db_pass: 'dbuserpass'
-      db_name: 'postgres'
-      endpoint: 'http://localhost:9000/graphql'
-    worker:
-      db_port: '5432'
-      db_host: '182.10.0.99'
-      db_user: 'dbuser'
-      db_pass: 'dbuserpass'
-      db_name: 'postgres'
-      endpoint: 'http://182.10.0.101:9000/graphql'
-
-
-  # To run these commands you need to type "gapi docker start|stop|build|worker1|worker2|worker3|etc"
-  
-  # You can define your custom commands for example 
-  # commands:
-  #   your-cli:
-  #     my-command: 'npm -v'
-  # This command can be executed as "gapi your-cli my-command"
+# You can define your custom commands for example 
+# commands:
+#   your-cli:
+#     my-command: 'npm -v'
+# This command can be executed as "gapi your-cli my-command"
 ```
 ###### Adding one more worker:
 ```yml
@@ -279,21 +364,6 @@ services:
     image: gapi/api/prod:latest
     ports:
       - "9000"
-    environment:
-      - NODE_ENV=production
-      - API_PORT=9000
-      - GRAPHIQL_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhNGVuc3RvcmVAZ21haWwuY29tIiwic2NvcGUiOlsiQURNSU4iXSwiaWQiOjIsImlhdCI6MTUxMTk3NDkzNX0.M9PnW2IrVp4XGRvbzFrl0tx6vqs6oXItFK-wF5roneI
-      - AMQP_HOST=182.10.0.5
-      - AMQP_PORT=5672
-      - CERT_PATH=
-
-      # Production db config
-      - DB_HOST=182.10.0.4
-      - DB_PORT=5432
-      - DB_NAME=postgres
-      - DB_USERNAME=dbuser
-      - DB_PASSWORD=dbuserpass
-
     restart: always
     mem_limit: 1000000000
     cpu_shares: 73
@@ -325,7 +395,6 @@ networks:
      config:
        - subnet: 182.10.0.0/16
          gateway: 182.10.0.1
-
 
 ```
 
