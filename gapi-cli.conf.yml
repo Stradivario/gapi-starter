@@ -41,6 +41,7 @@ config:
       db_user: 'dbuser'
       db_pass: 'dbuserpass'
       db_name: 'postgres'
+      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJzY29wZSI6WyJBRE1JTiJdLCJpZCI6MSwiaWF0IjoxNTE2OTk2MzYxfQ.7ANr5VHrViD3NkCaDr0nSWYwk46UAEbOwB52pqye4AM'
       endpoint: 'http://localhost:9000/graphql'
     worker:
       db_port: '5432'
@@ -48,6 +49,7 @@ config:
       db_user: 'dbuser'
       db_pass: 'dbuserpass'
       db_name: 'postgres'
+      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJzY29wZSI6WyJBRE1JTiJdLCJpZCI6MSwiaWF0IjoxNTE2OTk2MzYxfQ.7ANr5VHrViD3NkCaDr0nSWYwk46UAEbOwB52pqye4AM'
       endpoint: 'http://182.10.0.101:9000/graphql'
 
 

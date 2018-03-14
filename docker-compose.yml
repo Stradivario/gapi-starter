@@ -4,8 +4,8 @@ services:
   nginx:
     image: sameersbn/nginx:1.10.1-5
     ports:
-      - "81:80"
-      - "444:443"
+      - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/config:/etc/nginx
       - ./nginx/html:/usr/share/nginx/html/

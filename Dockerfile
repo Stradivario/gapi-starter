@@ -5,9 +5,7 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-RUN npm install -g Stradivario/gapi-cli pm2-docker ts-node typescript pm2
-
-COPY package-lock.json package-lock.json
+RUN npm install -g Stradivario/gapi-cli pm2-docker ts-node typescript pm2 jest
 
 COPY package.json package.json
 

@@ -14,7 +14,8 @@
     "stop:workers": "gapi workers stop",
     "pretest": "npm run lint",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
-    "test": "gapi test"
+    "test": "gapi test",
+    "test-watch": "gapi test --watch"
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",
@@ -36,7 +37,7 @@
     "ignore": [
       "./src/**/*.spec.ts"
     ],
-    "verbose": true,
+    "verbose": false,
     "exec": "ts-node ./src/main.ts",
     "watch": [
       "./src/**/*.ts"
@@ -60,6 +61,9 @@
       "json",
       "node"
     ],
+    "globals": {
+      "__DEV__": true
+    },
     "transform": {
       "\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
     },
