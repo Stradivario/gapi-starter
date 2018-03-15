@@ -3,7 +3,7 @@ import { UserSettings, UserSettingsObjectType } from './user.settings';
 
 @GapiObjectType()
 export class UserType {
-    readonly id: Object | GraphQLScalarType = GraphQLInt;
+    readonly id: number | GraphQLScalarType = GraphQLInt;
     readonly settings: string | UserSettings = UserSettingsObjectType;
 
     @Resolve('id')

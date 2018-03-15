@@ -1,4 +1,3 @@
-import { IQuery, IMutation } from '../core/test-util/api-types/graphql';
 import { AtcTestUtil } from '../core/test-util/testing.service';
 import { LOGIN_QUERY_TEST } from '../core/test-util/queries/login.query';
 import { REGISTER_MUTATION } from '../core/test-util/mutations/register.mutation';
