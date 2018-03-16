@@ -6,6 +6,15 @@
 ## This is basic example project related with [GAPI](https://github.com/Stradivario/gapi)
 ## To check advanced example project go to [advanced-example](https://github.com/Stradivario/gapi-starter-postgres-sequelize-rabbitmq)
 
+Heroku ready!
+###### Just set environment variable for graphiql websocket protocol `GRAPHIQL_WS_PATH=your-app-name.herokuapp.com`
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+Basic example has heroku ready button so global dependencies like ts-node and gapi-cli are installed inside project so Heroku builder will look inside node_modules.If you don't use heroku just write the following command:
+```bash
+npm uninstall gapi-cli ts-node
+```
+
 #### To start developing clone repository
 
 ```bash
@@ -69,7 +78,7 @@ gapi start
 gapi test --watch
 ```
 ###### You will end up with something like this
- ![Alt Text](https://raw.githubusercontent.com/Stradivario/gapi/master/images/sidebyside.png)
+ ![Alt Text](https://raw.githubusercontent.com/Stradivario/gapi-cli/master/docs/assets/images/sidebyside.png)
 
 #### Custom logic before testing ( for example creating MOCK users to database before testing)
 

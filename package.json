@@ -1,6 +1,6 @@
 {
   "name": "gapi-starter",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -21,8 +21,9 @@
   "license": "MIT",
   "dependencies": {
     "gapi": "github:Stradivario/gapi",
-    "pm2-docker": "^2.1.0",
+    "gapi-cli": "^0.5.2",
     "rxjs": "^5.5.6",
+    "ts-node": "^5.0.1",
     "typescript": "^2.7.1"
   },
   "devDependencies": {

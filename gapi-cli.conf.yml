@@ -1,6 +1,6 @@
 config:
 # Application configuration
-  app: 
+  app:
     local:
       API_PORT: 9000
       API_CERT: ./cert.key
@@ -17,9 +17,13 @@ config:
       NODE_ENV: production
       AMQP_HOST: 182.10.0.5
       AMQP_PORT: 5672
+      GRAPHIQL: true
+      GRAPHIQL_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJpZCI6MSwic2NvcGUiOlsiQURNSU4iXSwiaWF0IjoxNTIwMjkxMzkyfQ.9hpIDPkSiGvjTmUEyg_R_izW-ra2RzzLbe3Uh3IFsZg
+      ENDPOINT_TESTING: http://localhost:9000/graphql
+      TOKEN_TESTING: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJzY29wZSI6WyJBRE1JTiJdLCJpZCI6MSwiaWF0IjoxNTE2OTk2MzYxfQ.7ANr5VHrViD3NkCaDr0nSWYwk46UAEbOwB52pqye4AM
 # Testing configuration for local(dev) or worker(running tests as a separate worker with separate environment)
   test: 
-    local: extends app/local
+    local: extends app/prod
     worker:
       API_PORT: 9000
       API_CERT: ./cert.key
