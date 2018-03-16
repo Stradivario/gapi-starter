@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GapiObjectType, Type, Resolve, GraphQLScalarType } from 'gapi';
+import { GraphQLInt, GapiObjectType, Resolve, GraphQLScalarType } from 'gapi';
 import { UserSettings, UserSettingsObjectType } from './user.settings';
 
 @GapiObjectType()

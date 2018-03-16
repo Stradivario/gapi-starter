@@ -1,7 +1,6 @@
 
-import { GapiModule, ConfigService } from 'gapi';
+import { GapiModule } from 'gapi';
 import { AuthPrivateService } from './services/auth/auth.service';
-import { readFileSync } from 'fs';
 
 @GapiModule({
     services: [

@@ -1,5 +1,5 @@
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GapiObjectType, Type, Resolve, Injector, GraphQLScalarType } from 'gapi';
-import { AnotherService } from '../services/user.service';
+import { GraphQLString, GapiObjectType, Resolve, Injector, GraphQLScalarType } from 'gapi';
+import { AnotherService } from '../services/another.service';
 
 
 @GapiObjectType()

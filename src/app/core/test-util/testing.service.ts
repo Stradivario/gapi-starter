@@ -1,8 +1,6 @@
-import { Service, Container, Injector } from 'gapi';
+import { Service } from 'gapi';
 import { Observable } from 'rxjs';
 import { tester } from 'graphql-tester';
-import { Sequelize } from 'sequelize-typescript';
-import { AuthPrivateService } from '../services/auth/auth.service';
 
 interface Response<T> {
     raw: string;
@@ -17,12 +15,6 @@ export interface SIGNITURE {
     token: string;
 }
 
-interface TESTERS {
-    ADMIN?: SIGNITURE;
-    USER?: SIGNITURE;
-    ME?: SIGNITURE;
-}
-
 interface SendRequestQueryType {
     query: string;
     variables?: any;
@@ -33,8 +25,6 @@ interface SendRequestQueryType {
 export class AtcTestUtil {
 
     private tester: any;
-
-    @Injector(AuthPrivateService) private authService: AuthPrivateService;
 
     constructor(
 
