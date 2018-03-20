@@ -5,10 +5,13 @@
     "logo": "https://node-js-sample.herokuapp.com/node.svg",
     "keywords": ["node", "gapi", "hapi", "graphql"],
     "env": {
-        "HEROKU": "true",
+        "DEPLOY_PLATFORM": "heroku",
         "API_CERT": "./cert.key",
         "GRAPHIQL_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJpZCI6MSwic2NvcGUiOlsiQURNSU4iXSwiaWF0IjoxNTIwMjkxMzkyfQ.9hpIDPkSiGvjTmUEyg_R_izW-ra2RzzLbe3Uh3IFsZg",
-        "GRAPHIQL_WS_PATH": "",
+        "GRAPHIQL_WS_PATH": {
+            "description": "Please enter your heroku expected address 'your-app-name.herokuapp.com'",
+            "required": true
+        },
         "GRAPHIQL_WS_SSH": "true",
         "NODE_ENV": "development"
     }
