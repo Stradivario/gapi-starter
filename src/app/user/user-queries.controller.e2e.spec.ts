@@ -54,6 +54,7 @@ describe('User Queries Controller', () => {
 //       });
 //   });
 
+
 //   it('e2e: query => (register) : Should sucessfully register user', async done => {
 //     const fakeUser = {
 //       name: generateName(),
