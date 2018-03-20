@@ -53,7 +53,7 @@ commands:
     start-executor:
       - docker run -d --network=gapiapiprod_gapi --ip=182.10.0.100 --name gapi-api-prod-worker-tests-executor gapi/api/prod
       - docker exec gapi-api-prod-worker-tests-provider npm -v
-      - gapi test --worker --before
+      - gapi test --worker
 
   workers:
     start:
@@ -80,7 +80,6 @@ commands:
       - gapi nginx stop
       - gapi api stop
       - gapi rabbitmq stop
-      - gapi postgres stop
     build: docker build -t gapi/api/prod .
 
   api:
@@ -88,9 +87,6 @@ commands:
 
   nginx:
     stop: docker rm -f gapi-api-nginx
-
-  postgres:
-    stop: docker rm -f gapi-api-postgres
 
   rabbitmq:
     stop: docker rm -f gapi-api-rabbitmq
