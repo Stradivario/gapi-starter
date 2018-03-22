@@ -1,5 +1,5 @@
 
-import { GapiModule } from 'gapi';
+import { GapiModule } from '@gapi/core';
 import { UserModule } from './user/user.module';
 import { CoreModule } from './core/core.module';
 

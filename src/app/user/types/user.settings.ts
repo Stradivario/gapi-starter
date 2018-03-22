@@ -1,4 +1,4 @@
-import { GraphQLString, GapiObjectType, Resolve, Injector, GraphQLScalarType } from 'gapi';
+import { GraphQLString, GapiObjectType, Resolve, Injector, GraphQLScalarType } from '@gapi/core';
 import { AnotherService } from '../services/another.service';
 
 

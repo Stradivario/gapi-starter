@@ -10,9 +10,9 @@ Heroku ready!
 ###### Just set environment variable for graphiql websocket protocol `GRAPHIQL_WS_PATH=your-app-name.herokuapp.com`
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-Basic example has heroku ready button so global dependencies like ts-node and gapi-cli are installed inside project so Heroku builder will look inside node_modules.If you don't use heroku just write the following command:
+Basic example has heroku ready button so global dependencies like ts-node and @gapi/cli are installed inside project so Heroku builder will look inside node_modules.If you don't use heroku just write the following command:
 ```bash
-npm uninstall gapi-cli ts-node
+npm uninstall @gapi/cli ts-node
 ```
 
 #### To start developing clone repository
@@ -24,7 +24,7 @@ git clone https://github.com/Stradivario/gapi-starter
 #### Better use command line utility(gapi-cli) to install it type following command:
 
 ```bash
-npm i -g gapi-cli
+npm i -g @gapi/cli
 ```
 
 
@@ -57,7 +57,7 @@ npm run stop:prod
 
 ### Testing
 
-###### To start developing with testing GAPI uses JEST and gapi-cli is preconfigurated for your needs! :)
+###### To start developing with testing GAPI uses JEST and @gapi/cli is preconfigurated for your needs! :)
 
 #### To run single test type:
 ```bash

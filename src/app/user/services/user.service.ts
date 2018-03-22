@@ -1,4 +1,4 @@
-import { Service } from 'gapi';
+import { Service } from '@gapi/core';
 import { IUserType } from '../../core/api-introspection';
 
 

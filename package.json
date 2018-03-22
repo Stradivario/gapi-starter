@@ -20,8 +20,8 @@
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
-    "gapi": "github:Stradivario/gapi",
-    "gapi-cli": "^0.6.4",
+    "@gapi/cli": "^0.6.8",
+    "@gapi/core": "^0.5.1",
     "rxjs": "^5.5.6",
     "ts-node": "^5.0.1",
     "typescript": "^2.7.1"

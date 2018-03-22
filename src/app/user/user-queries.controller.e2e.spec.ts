@@ -3,7 +3,7 @@ import { LOGIN_QUERY_TEST } from '../core/test-util/queries/login.query';
 import { REGISTER_MUTATION } from '../core/test-util/mutations/register.mutation';
 import { FIND_USER_QUERY_TEST } from '../core/test-util/queries/findUser.query';
 import { AuthPrivateService } from '../core/services/auth/auth.service';
-import { Container } from 'gapi';
+import { Container } from '@gapi/core';
 
 const atcTestUtil: AtcTestUtil = Container.get(AtcTestUtil);
 

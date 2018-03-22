@@ -1,4 +1,4 @@
-import { Service } from 'gapi';
+import { Service } from '@gapi/core';
 import { Observable } from 'rxjs';
 import { tester } from 'graphql-tester';
 

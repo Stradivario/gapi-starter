@@ -1,5 +1,5 @@
 
-import { GapiModule } from 'gapi';
+import { GapiModule } from '@gapi/core';
 import { AuthPrivateService } from './services/auth/auth.service';
 
 @GapiModule({
