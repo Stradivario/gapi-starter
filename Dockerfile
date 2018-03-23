@@ -5,7 +5,7 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-RUN npm install -g ts-node typescript pm2 jest gapi-cli pm2-docker 
+RUN npm install -g ts-node typescript pm2 jest @gapi/cli pm2-docker 
 
 COPY package.json package.json
 
