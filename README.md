@@ -12,7 +12,7 @@ Heroku ready!
 
 Basic example has heroku ready button so global dependencies like ts-node and gapi-cli are installed inside project so Heroku builder will look inside node_modules.If you don't use heroku just write the following command:
 ```bash
-npm uninstall gapi-cli ts-node
+npm uninstall @gapi/cli ts-node
 ```
 
 #### To start developing clone repository
@@ -24,7 +24,7 @@ git clone https://github.com/Stradivario/gapi-starter
 #### Better use command line utility(gapi-cli) to install it type following command:
 
 ```bash
-npm i -g gapi-cli
+npm i -g @gapi/cli
 ```
 
 
