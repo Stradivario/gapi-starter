@@ -9,4 +9,8 @@ export class AnotherService {
     trimFirstLetterAsync(username): Promise<string> {
         return Promise.resolve(this.trimFirstLetter(username));
     }
+
+    returnTrueAsync() {
+        return Promise.resolve(true);
+    }
 }

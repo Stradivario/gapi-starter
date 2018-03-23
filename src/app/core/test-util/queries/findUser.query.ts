@@ -1,11 +1,14 @@
 export const FIND_USER_QUERY_TEST = `
-query login($id: Int!) {
+  query findUser($id: Int!) {
     findUser(id: $id) {
-        id
-        settings {
-          username
-          firstname
-        }
+      id
+      email
+      type
+      password
+      name
+      settings {
+        sidebar
       }
-}
+    }
+  }
 `;

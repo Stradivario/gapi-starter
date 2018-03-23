@@ -1,4 +1,4 @@
-import { GraphQLString, GapiObjectType, Resolve, Injector, GraphQLScalarType } from '@gapi/core';
+import { GapiObjectType, Resolve, Injector, GraphQLScalarType, GraphQLBoolean } from '@gapi/core';
 import { AnotherService } from '../services/another.service';
 
 
@@ -7,12 +7,11 @@ export class UserSettings {
 
     @Injector(AnotherService) private anotherService?: AnotherService;
 
-    readonly username: string | GraphQLScalarType = GraphQLString;
-    readonly firstname: string | GraphQLScalarType = GraphQLString;
+    readonly sidebar: string | GraphQLScalarType = GraphQLBoolean;
 
-    @Resolve('username')
+    @Resolve('sidebar')
     async getUsername?(root, payload, context) {
-        return await this.anotherService.trimFirstLetterAsync(root.username);
+        return await this.anotherService.returnTrueAsync();
     }
 
 }

@@ -11,9 +11,12 @@ export class UserService {
     findUser(id: number): IUserType {
         return {
             id: 1,
+            email: 'test@gmail.com',
+            type: 'ADMIN',
+            password: '123456',
+            name: 'Pesho',
             settings: {
-                firstname: 'pesho',
-                username: 'gosho',
+                sidebar: true
             }
         };
     }
@@ -21,9 +24,12 @@ export class UserService {
     addUser(id: number): IUserType {
         return {
             id: 1,
+            email: 'test@gmail.com',
+            type: 'ADMIN',
+            password: '123456',
+            name: 'Pesho',
             settings: {
-                firstname: 'pesho',
-                username: 'gosho',
+                sidebar: true
             }
         };
     }
@@ -31,9 +37,12 @@ export class UserService {
     deleteUser(id: number): IUserType {
         return {
             id: 1,
+            email: 'test@gmail.com',
+            type: 'ADMIN',
+            password: '123456',
+            name: 'Pesho',
             settings: {
-                firstname: 'pesho',
-                username: 'gosho',
+                sidebar: true
             }
         };
     }
@@ -41,9 +50,12 @@ export class UserService {
     updateUser(id): IUserType {
         return {
             id: 1,
+            email: 'test@gmail.com',
+            type: 'ADMIN',
+            password: '123456',
+            name: 'Pesho',
             settings: {
-                firstname: 'pesho',
-                username: 'gosho',
+                sidebar: true
             }
         };
     }

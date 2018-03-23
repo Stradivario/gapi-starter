@@ -1,6 +1,6 @@
 {
   "name": "gapi-starter",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -20,8 +20,8 @@
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
-    "@gapi/cli": "^0.6.8",
-    "@gapi/core": "^0.5.1",
+    "gapi": "github:Stradivario/gapi",
+    "gapi-cli": "^0.6.6",
     "rxjs": "^5.5.6",
     "ts-node": "^5.0.1",
     "typescript": "^2.7.1"
@@ -44,7 +44,7 @@
       "./src/**/*.ts"
     ],
     "events": {
-      "restart": "sleep 4 && gapi schema introspect"
+      "restart": "sleep 4 && gapi schema introspect --collect-documents"
     },
     "ext": "ts"
   },

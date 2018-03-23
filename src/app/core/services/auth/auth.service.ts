@@ -42,7 +42,11 @@ export class AuthPrivateService {
         return this.authService.verifyToken(token);
     }
 
-    signJWTtoken(): string {
+    signJWTtoken(tokenData: TokenData): string {
+        return this.authService.sign(tokenData);
+    }
+
+    issueJWTToken(tokenData: TokenData) {
         const jwtToken = this.authService.sign({
             email: '',
             id: 1,

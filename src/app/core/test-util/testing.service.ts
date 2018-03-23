@@ -22,7 +22,7 @@ interface SendRequestQueryType {
 }
 
 @Service()
-export class AtcTestUtil {
+export class TestUtil {
 
     private tester: any;
 

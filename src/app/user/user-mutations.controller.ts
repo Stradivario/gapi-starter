@@ -2,6 +2,7 @@ import { GraphQLNonNull, Scope, Type, Mutation, GapiController, GraphQLInt, Inje
 import { UserService } from './services/user.service';
 import { UserObjectType, UserType } from './types/user.type';
 import { UserMessage, UserMessageType } from './types/user-message.type';
+import { IUserType } from '../core/api-introspection';
 
 @GapiController()
 export class UserMutationsController {
@@ -33,7 +34,7 @@ export class UserMutationsController {
             type: new GraphQLNonNull(GraphQLInt)
         }
     })
-    deleteUser(root, { id }, context): UserType  {
+    deleteUser(root, { id }, context): IUserType  {
         return this.userService.deleteUser(id);
     }
 
@@ -44,7 +45,7 @@ export class UserMutationsController {
             type: new GraphQLNonNull(GraphQLInt)
         }
     })
-    updateUser(root, { id }, context): UserType {
+    updateUser(root, { id }, context): IUserType {
         return this.userService.updateUser(id);
     }
 
@@ -55,7 +56,7 @@ export class UserMutationsController {
             type: new GraphQLNonNull(GraphQLInt)
         }
     })
-    addUser(root, { id }, context): UserType  {
+    addUser(root, { id }, context): IUserType  {
         return this.userService.addUser(id);
     }
 
