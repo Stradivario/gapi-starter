@@ -1,16 +1,21 @@
+# @Gapi Basic Starter
+
 ![Build Status](http://gitlab.youvolio.com/gapi/gapi-starter/badges/master/build.svg)
 
-# @Gapi Basic Starter 
-##### @Nginx, @Rabbitmq, @Postgres, @Sequelize, @Docker, @Graphql
+## @Nginx, @Rabbitmq, @Postgres, @Sequelize, @Docker, @Graphql
 
 ## This is basic example project related with [GAPI](https://github.com/Stradivario/gapi)
+
 ## To check advanced example project go to [advanced-example](https://github.com/Stradivario/gapi-starter-postgres-sequelize-rabbitmq)
 
 Heroku ready!
-###### Just set environment variable for graphiql websocket protocol `GRAPHIQL_WS_PATH=your-app-name.herokuapp.com`
+
+### Just set environment variable for graphiql websocket protocol `GRAPHIQL_WS_PATH=your-app-name.herokuapp.com`
+
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 Basic example has heroku ready button so global dependencies like ts-node and gapi-cli are installed inside project so Heroku builder will look inside node_modules.If you don't use heroku just write the following command:
+
 ```bash
 npm uninstall @gapi/cli ts-node
 ```
@@ -27,63 +32,74 @@ git clone https://github.com/Stradivario/gapi-starter
 npm i -g @gapi/cli
 ```
 
-
-
 #### Type the following command to create new project from scratch via CLI
 
 ```bash
 gapi new my-project
 ```
 
-
-
 #### To start project for "development" type:
 
 ```bash
 npm start
 ```
+
 #### To start project for "production" type:
+
 This will run following commands "pm2 process.yml --only APP" (DEVELPOMENT) or "pm2-docker process.yml --only APP"(PRODUCTION inside docker) (check process.yml inside root repository)
+
 ```bash
 npm run start:prod
 ```
 
 #### To stop project for "production" type:
+
 Following command will stop pm2 processes started
+
 ```bash
 npm run stop:prod
 ```
 
-
 ### Testing
 
-###### To start developing with testing GAPI uses JEST and gapi-cli is preconfigurated for your needs! :)
+#### To start developing with testing GAPI uses JEST and gapi-cli is preconfigurated for your needs! :)
 
 #### To run single test type:
+
 ```bash
 gapi test
 ```
 
 #### Testing watch mode
-###### Note: You need to start server before running tests 
+
+##### Note: You need to start server before running tests
+
 ###### Note: Everytime you make change to server it will restart server and execute tests
+
 ###### Note: To add more tests just create e2e.spec.ts or unit.spec.ts somewhere inside the application
 
 ##### Start the application
+
 ```bash
 gapi start
 ```
+
 ##### Execute test with --watch argument
+
 ```bash
 gapi test --watch
 ```
+
 ###### You will end up with something like this
+
  ![Alt Text](https://raw.githubusercontent.com/Stradivario/gapi-cli/master/docs/assets/images/sidebyside.png)
 
 #### Custom logic before testing ( for example creating MOCK users to database before testing)
 
 ##### Create file test.ts inside root/src/test.ts with this content
+
 ##### Everytime you run test with --before argument it will set environment variable BEFORE_HOOK
+
 ```typescript
   if (process.env.BEFORE_HOOK) {
     // do something here
@@ -91,6 +107,7 @@ gapi test --watch
 ```
 
 ##### Then execute tests with --before
+
 ```bash
 gapi test --before
 ```
@@ -99,43 +116,54 @@ gapi test --before
 
 ### Docker
 
-###### Following commands will start RabbitMQ, PostgreSQL, API, NGINX as a services you need DOCKER for them
-###### API will be served on https://localhost:80 and https://localhost:80/subscriptions
+#### Following commands will start RabbitMQ, PostgreSQL, API, NGINX as a services you need DOCKER for them
 
+##### API will be served on https://localhost:80 and https://localhost:80/subscriptions
 
 #### To build project with Docker type:
+
 ```bash
 gapi app build
 ```
 
 #### To start project with Docker type:
+
 ```bash
 gapi app start
 ```
 
 #### To stop project type:
+
 ```bash
 gapi app stop
 ```
 
 ### Workers
+
 ###### All workers will be mapped as Proxy and will be reverted to https://localhost:80 and https://localhost:80/subscriptions
+
 ###### So you don't have to worry about if some of your workers stopped responding
+
 ###### TODO: Create monitoring APP for all workers and main API
 
 #### To start workers type:
+
 ```bash
 gapi workers start
 ```
 
 #### To stop workers type:
+
 ```bash
 gapi workers stop
 ```
 
 ###### To add more workers
+
 ###### By default there are 4 workers with 4 processes with "exec_mode: cluster" of the original process inside single docker container
+
 ###### You can control Processes inside single docker container from "root/process.yml" file.
+
 ```yml
 apps:
   - script   : './src/main.ts'
@@ -146,7 +174,6 @@ apps:
 ```
 
 ###### To map new worker as a stream open root/nginx/config/private/default
-
 
 ```nginx
 upstream app_servers {
@@ -214,6 +241,7 @@ server {
 ```
 
 ###### When you add another worker it should be on different IP with same port 9000
+
 ###### Open root/gapi.conf.yml file you will find this file:
 
 ```yml
@@ -318,18 +346,24 @@ commands:
 #     my-command: 'npm -v'
 # This command can be executed as "gapi your-cli my-command"
 ```
+
 ###### Adding one more worker:
+
 ```yml
 start-5: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.25 --name gapi-api-prod-worker-5 -p 9005:9000 gapi/api/prod'
 ```
-###### Then edit start task inside workers to start new worker 5 
+
+###### Then edit start task inside workers to start new worker 5
+
 ```yml
 start: 'gapi workers start-1 && gapi workers start-2 && gapi workers start-3 && gapi workers start-4 & gapi workers start-5'
 ```
 
 ###### Thats' it!! Now you have 4 processes like CLUSTERS inside 1 docker container with ip 182.10.0.25 and external port(optional) 9005;
-###### You can specify worker also without port because all workers are inside internal network called "gapiapiprod_gapi" 
-###### 182.10.0.21/22/23/24/25:9000 
+
+###### You can specify worker also without port because all workers are inside internal network called "gapiapiprod_gapi"
+
+###### 182.10.0.21/22/23/24/25:9000
 
 ```yml
 start-5: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.25 --name gapi-api-prod-worker-5 gapi/api/prod'
@@ -346,9 +380,11 @@ start-5: 'docker run -d --network=gapiapiprod_gapi --ip=182.10.0.25 --name gapi-
 ```
 
 ###### Now you can find your API served onto https://localhost:81/ and https://localhost:81/subscriptions
-###### All workers don't care about that  because they will be served and mapped from nginx to port 80.
+
+###### All workers don't care about that  because they will be served and mapped from nginx to port 80
 
 ###### You can check docker-compose file to configurate environment variables
+
 ```yml
 version: '2'
 services:
