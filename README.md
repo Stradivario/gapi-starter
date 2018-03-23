@@ -10,7 +10,7 @@
 
 Heroku ready!
 
-### Just set environment variable for graphiql websocket protocol `GRAPHIQL_WS_PATH=your-app-name.herokuapp.com`
+Just set environment variable for graphiql websocket protocol `GRAPHIQL_WS_PATH=your-app-name.herokuapp.com`
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
@@ -20,7 +20,7 @@ Basic example has heroku ready button so global dependencies like ts-node and ga
 npm uninstall @gapi/cli ts-node
 ```
 
-#### To start developing clone repository
+### To start developing clone repository
 
 ```bash
 git clone https://github.com/Stradivario/gapi-starter
@@ -140,25 +140,25 @@ gapi app stop
 
 ### Workers
 
-###### All workers will be mapped as Proxy and will be reverted to https://localhost:80 and https://localhost:80/subscriptions
+#### All workers will be mapped as Proxy and will be reverted to https://localhost:80 and https://localhost:80/subscriptions
 
-###### So you don't have to worry about if some of your workers stopped responding
+##### So you don't have to worry about if some of your workers stopped responding
 
 ###### TODO: Create monitoring APP for all workers and main API
 
-#### To start workers type:
+#### To start workers type
 
 ```bash
 gapi workers start
 ```
 
-#### To stop workers type:
+#### To stop workers type
 
 ```bash
 gapi workers stop
 ```
 
-###### To add more workers
+##### To add more workers
 
 ###### By default there are 4 workers with 4 processes with "exec_mode: cluster" of the original process inside single docker container
 
