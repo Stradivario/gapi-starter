@@ -1,15 +1,16 @@
-import { GraphQLNonNull, Scope, Type, Mutation, GapiController, GraphQLInt, Injector, GapiPubSubService, GraphQLString } from '@gapi/core';
+import { GraphQLNonNull, Scope, Type, Mutation, GapiController, GraphQLInt, GapiPubSubService, GraphQLString } from '@gapi/core';
 import { UserService } from './services/user.service';
-import { UserObjectType, UserType } from './types/user.type';
+import { UserObjectType } from './types/user.type';
 import { UserMessage, UserMessageType } from './types/user-message.type';
 import { IUserType } from '../core/api-introspection';
 
 @GapiController()
 export class UserMutationsController {
 
-    @Injector(UserService) private userService: UserService;
-    @Injector(GapiPubSubService) private pubsub: GapiPubSubService;
-
+    constructor(
+        private userService: UserService,
+        private pubsub: GapiPubSubService
+    ) {}
 
     @Scope('ADMIN')
     @Type(UserMessageType)

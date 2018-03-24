@@ -1,6 +1,6 @@
-import { Query, GraphQLNonNull, Type, GapiController, GraphQLInt, Injector, GraphQLString } from '@gapi/core';
+import { Query, GraphQLNonNull, Type, GapiController, GraphQLInt, GraphQLString } from '@gapi/core';
 import { UserService } from './services/user.service';
-import { UserObjectType, UserType } from './types/user.type';
+import { UserObjectType } from './types/user.type';
 import { UserTokenObjectType } from './types/user-login.type';
 import { AuthPrivateService } from '../core/services/auth/auth.service';
 import { IUserType, IUserTokenType } from '../core/api-introspection/index';
@@ -8,8 +8,10 @@ import { IUserType, IUserTokenType } from '../core/api-introspection/index';
 @GapiController()
 export class UserQueriesController {
 
-    @Injector(UserService) private userService: UserService;
-    @Injector(AuthPrivateService) private authService: AuthPrivateService;
+    constructor(
+        private userService: UserService,
+        private authService: AuthPrivateService
+    ) { }
 
     @Type(UserObjectType)
     @Query({
@@ -17,7 +19,7 @@ export class UserQueriesController {
             type: new GraphQLNonNull(GraphQLInt)
         }
     })
-    findUser(root, { id }, context): IUserType  {
+    findUser(root, { id }, context): IUserType {
         return this.userService.findUser(id);
     }
 
@@ -30,7 +32,7 @@ export class UserQueriesController {
             type: new GraphQLNonNull(GraphQLString)
         }
     })
-    login(root, {email, password}, context) {
+    login(root, { email, password }, context) {
         let credential: IUserTokenType;
 
         // Find user from database
@@ -61,7 +63,3 @@ export class UserQueriesController {
     }
 
 }
-
-
-
-

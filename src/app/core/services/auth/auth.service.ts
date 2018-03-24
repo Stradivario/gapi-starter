@@ -1,7 +1,6 @@
 
-import { Service, ConnectionHookService, AuthService, Injector, TokenData } from '@gapi/core';
+import { Service, ConnectionHookService, AuthService, TokenData } from '@gapi/core';
 import * as Boom from 'boom';
-
 
 interface UserInfo extends TokenData {
     scope: ['ADMIN', 'USER'];
@@ -11,10 +10,10 @@ interface UserInfo extends TokenData {
 @Service()
 export class AuthPrivateService {
 
-    @Injector(AuthService) private authService: AuthService;
-    @Injector(ConnectionHookService) private connectionHookService: ConnectionHookService;
-
-    constructor() {
+    constructor(
+        private authService: AuthService,
+        private connectionHookService: ConnectionHookService
+    ) {
         this.connectionHookService.modifyHooks.onSubConnection = this.onSubConnection.bind(this);
         this.authService.modifyFunctions.validateToken = this.validateToken.bind(this);
     }

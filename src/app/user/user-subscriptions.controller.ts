@@ -1,7 +1,7 @@
 
 import {
     GapiController,
-    GapiPubSubService, Type, Injector, Subscribe, Subscription, withFilter, Scope, GraphQLInt, GraphQLNonNull
+    GapiPubSubService, Type, Subscribe, Subscription, withFilter, Scope, GraphQLInt, GraphQLNonNull, Injector
 } from '@gapi/core';
 import { UserMessageType, UserMessage } from './types/user-message.type';
 
