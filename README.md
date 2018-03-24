@@ -1,6 +1,6 @@
 # @Gapi Basic Starter
 
-![Build Status](http://gitlab.youvolio.com/gapi/gapi-starter/badges/master/build.svg)
+[![Build Status](https://travis-ci.org/Stradivario/gapi-starter.svg?branch=master)](https://travis-ci.org/Stradivario/gapi-starter)
 
 ## @Nginx, @Rabbitmq, @Postgres, @Sequelize, @Docker, @Graphql
 
