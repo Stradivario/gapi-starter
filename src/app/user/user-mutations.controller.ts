@@ -1,7 +1,7 @@
 import { GraphQLNonNull, Scope, Type, Mutation, GapiController, GraphQLInt, GapiPubSubService, GraphQLString } from '@gapi/core';
 import { UserService } from './services/user.service';
-import { UserObjectType } from './types/user.type';
-import { UserMessage, UserMessageType } from './types/user-message.type';
+import { UserType } from './types/user.type';
+import { UserMessage } from './types/user-message.type';
 import { IUserType } from '../core/api-introspection';
 
 @GapiController()
@@ -13,7 +13,7 @@ export class UserMutationsController {
     ) {}
 
     @Scope('ADMIN')
-    @Type(UserMessageType)
+    @Type(UserMessage)
     @Mutation({
         message: {
             type: new GraphQLNonNull(GraphQLString)
@@ -29,7 +29,7 @@ export class UserMutationsController {
     }
 
     @Scope('ADMIN')
-    @Type(UserObjectType)
+    @Type(UserType)
     @Mutation({
         id: {
             type: new GraphQLNonNull(GraphQLInt)
@@ -40,7 +40,7 @@ export class UserMutationsController {
     }
 
     @Scope('ADMIN')
-    @Type(UserObjectType)
+    @Type(UserType)
     @Mutation({
         id: {
             type: new GraphQLNonNull(GraphQLInt)
@@ -51,7 +51,7 @@ export class UserMutationsController {
     }
 
     @Scope('ADMIN')
-    @Type(UserObjectType)
+    @Type(UserType)
     @Mutation({
         id: {
             type: new GraphQLNonNull(GraphQLInt)

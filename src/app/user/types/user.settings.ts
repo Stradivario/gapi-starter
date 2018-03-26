@@ -15,5 +15,3 @@ export class UserSettings {
     }
 
 }
-
-export const UserSettingsObjectType = new UserSettings();

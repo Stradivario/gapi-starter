@@ -1,7 +1,7 @@
 import { Query, GraphQLNonNull, Type, GapiController, GraphQLInt, GraphQLString } from '@gapi/core';
 import { UserService } from './services/user.service';
-import { UserObjectType } from './types/user.type';
-import { UserTokenObjectType } from './types/user-login.type';
+import { UserType } from './types/user.type';
+import { UserTokenType } from './types/user-login.type';
 import { AuthPrivateService } from '../core/services/auth/auth.service';
 import { IUserType, IUserTokenType } from '../core/api-introspection/index';
 
@@ -13,7 +13,7 @@ export class UserQueriesController {
         private authService: AuthPrivateService
     ) { }
 
-    @Type(UserObjectType)
+    @Type(UserType)
     @Query({
         id: {
             type: new GraphQLNonNull(GraphQLInt)
@@ -23,7 +23,7 @@ export class UserQueriesController {
         return this.userService.findUser(id);
     }
 
-    @Type(UserTokenObjectType)
+    @Type(UserTokenType)
     @Query({
         email: {
             type: new GraphQLNonNull(GraphQLString)
