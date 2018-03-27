@@ -5,4 +5,4 @@ env:
   - DEPLOY_PLATFORM=heroku
 language: node_js
 node_js:
-  - "7"
+  - "8"
