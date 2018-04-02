@@ -4,9 +4,9 @@ import { EffectTypes } from '../core/api-introspection/EffectTypes';
 @Service()
 export class UserEffects {
 
-    @OfType<EffectTypes>(EffectTypes.findUser)
-    findUser(payload, context) {
-        console.log(payload, context);
+    @OfType<EffectTypes>(EffectTypes.login)
+    findUser(result, payload, context) {
+        console.log(result, payload, context);
     }
 
 }
