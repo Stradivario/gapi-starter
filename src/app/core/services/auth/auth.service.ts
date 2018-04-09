@@ -2,9 +2,10 @@
 import { Service, ConnectionHookService, AuthService, TokenData } from '@gapi/core';
 import * as Boom from 'boom';
 
-interface UserInfo extends TokenData {
+export interface UserInfo extends TokenData {
     scope: ['ADMIN', 'USER'];
     type: 'ADMIN' | 'USER';
+    iat: number;
 }
 
 @Service()

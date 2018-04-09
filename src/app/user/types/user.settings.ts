@@ -7,10 +7,10 @@ export class UserSettings {
 
     @Injector(AnotherService) private anotherService?: AnotherService;
 
-    readonly sidebar: string | GraphQLScalarType = GraphQLBoolean;
+    readonly sidebar: boolean | GraphQLScalarType = GraphQLBoolean;
 
     @Resolve('sidebar')
-    async getUsername?(root, payload, context) {
+    async getSidebar?(root, payload, context) {
         return await this.anotherService.returnTrueAsync();
     }
 

@@ -8,7 +8,7 @@ export class UserType {
     readonly type: string | GraphQLScalarType =  GraphQLString;
     readonly password: string | GraphQLScalarType =  GraphQLString;
     readonly name: string | GraphQLScalarType =  GraphQLString;
-    readonly settings: string | UserSettings = InjectType(UserSettings);
+    readonly settings: UserSettings = InjectType(UserSettings);
 
     @Resolve('id')
     getId?(root, payload, context) {
