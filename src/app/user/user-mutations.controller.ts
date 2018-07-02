@@ -1,19 +1,23 @@
-import { GraphQLNonNull, Scope, Type, Mutation, GapiController, GraphQLInt, GapiPubSubService, GraphQLString } from '@gapi/core';
+import { Controller } from '@rxdi/core';
 import { UserService } from './services/user.service';
 import { UserType } from './types/user.type';
 import { UserMessage } from './types/user-message.type';
 import { IUserType } from '../core/api-introspection';
+import { PubSubService } from '@rxdi/graphql-pubsub';
+import { Scope, Type, Mutation, Public } from '@rxdi/graphql';
+import { GraphQLNonNull, GraphQLString, GraphQLInt } from 'graphql';
 
-@GapiController()
+@Controller()
 export class UserMutationsController {
 
     constructor(
         private userService: UserService,
-        private pubsub: GapiPubSubService
+        private pubsub: PubSubService
     ) {}
 
     @Scope('ADMIN')
     @Type(UserMessage)
+    @Public()
     @Mutation({
         message: {
             type: new GraphQLNonNull(GraphQLString)
@@ -60,6 +64,5 @@ export class UserMutationsController {
     addUser(root, { id }, context): IUserType  {
         return this.userService.addUser(id);
     }
-
 
 }

@@ -1,8 +1,8 @@
 
-import { Service, ConnectionHookService, AuthService, TokenData } from '@gapi/core';
+import { Service } from '@rxdi/core';
 import * as Boom from 'boom';
 
-export interface UserInfo extends TokenData {
+export interface UserInfo {
     scope: ['ADMIN', 'USER'];
     type: 'ADMIN' | 'USER';
     iat: number;
@@ -12,11 +12,11 @@ export interface UserInfo extends TokenData {
 export class AuthPrivateService {
 
     constructor(
-        private authService: AuthService,
-        private connectionHookService: ConnectionHookService
+        // private authService: AuthService,
+        // private connectionHookService: ConnectionHookService
     ) {
-        this.connectionHookService.modifyHooks.onSubConnection = this.onSubConnection.bind(this);
-        this.authService.modifyFunctions.validateToken = this.validateToken.bind(this);
+        // this.connectionHookService.modifyHooks.onSubConnection = this.onSubConnection.bind(this);
+        // this.authService.modifyFunctions.validateToken = this.validateToken.bind(this);
     }
 
     onSubConnection(connectionParams): UserInfo {
@@ -38,29 +38,29 @@ export class AuthPrivateService {
         }
     }
 
-    verifyToken(token: string): TokenData {
-        return this.authService.verifyToken(token);
+    verifyToken(token: string): any {
+        // return this.authService.verifyToken(token);
     }
 
-    signJWTtoken(tokenData: TokenData): string {
-        return this.authService.sign(tokenData);
+    signJWTtoken(tokenData: any): any {
+        // return this.authService.sign(tokenData);
     }
 
-    issueJWTToken(tokenData: TokenData) {
-        const jwtToken = this.authService.sign({
-            email: '',
-            id: 1,
-            scope: ['ADMIN', 'USER']
-        });
-        return jwtToken;
+    issueJWTToken(tokenData: any) {
+        // const jwtToken = this.authService.sign({
+        //     email: '',
+        //     id: 1,
+        //     scope: ['ADMIN', 'USER']
+        // });
+        // return jwtToken;
     }
 
-    decryptPassword(password: string): string {
-        return this.authService.decrypt(password);
+    decryptPassword(password: string): any {
+        // return this.authService.decrypt(password);
     }
 
-    encryptPassword(password: string): string {
-        return this.authService.encrypt(password);
+    encryptPassword(password: string): any {
+        // return this.authService.encrypt(password);
     }
 
 }

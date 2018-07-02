@@ -1,11 +1,13 @@
-import { Query, GraphQLNonNull, Type, GapiController, GraphQLInt, GraphQLString } from '@gapi/core';
+import { Controller } from '@rxdi/core';
+import { Type, Query, Public } from '@rxdi/graphql';
+import { GraphQLNonNull, GraphQLInt, GraphQLString } from 'graphql';
 import { UserService } from './services/user.service';
 import { UserType } from './types/user.type';
 import { UserTokenType } from './types/user-login.type';
 import { AuthPrivateService } from '../core/services/auth/auth.service';
 import { IUserType, IUserTokenType } from '../core/api-introspection/index';
 
-@GapiController()
+@Controller()
 export class UserQueriesController {
 
     constructor(
@@ -14,6 +16,7 @@ export class UserQueriesController {
     ) { }
 
     @Type(UserType)
+    @Public()
     @Query({
         id: {
             type: new GraphQLNonNull(GraphQLInt)

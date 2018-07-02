@@ -1,6 +1,7 @@
-import { GapiObjectType, GraphQLScalarType, GraphQLString } from '@gapi/core';
+import { ObjectType } from '@rxdi/graphql';
+import { GraphQLScalarType, GraphQLString } from 'graphql';
 
-@GapiObjectType()
+@ObjectType()
 export class UserMessage {
     readonly message: string | GraphQLScalarType = GraphQLString;
 }

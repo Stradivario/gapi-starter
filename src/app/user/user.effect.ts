@@ -1,13 +1,15 @@
-import { OfType, GapiEffect, GapiPubSubService } from '@gapi/core';
+import { Effect } from '@rxdi/core';
+import { PubSubService } from '@rxdi/graphql-pubsub';
+import { OfType } from '@rxdi/graphql';
 import { EffectTypes } from '../core/api-introspection/EffectTypes';
 import { UserType } from './types/user.type';
 import { UserInfo } from '../core/services/auth/auth.service';
 
-@GapiEffect()
+@Effect()
 export class UserEffect {
 
     constructor(
-        private pubSub: GapiPubSubService
+        private pubSub: PubSubService
     ) {}
 
     @OfType<EffectTypes>(EffectTypes.findUser)

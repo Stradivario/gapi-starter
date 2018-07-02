@@ -1,7 +1,8 @@
-import { GapiObjectType, GraphQLScalarType, GraphQLString, InjectType } from '@gapi/core';
+import { ObjectType, InjectType } from '@rxdi/graphql';
 import { UserType } from './user.type';
+import { GraphQLScalarType, GraphQLString } from 'graphql';
 
-@GapiObjectType()
+@ObjectType()
 export class UserTokenType {
     readonly token: string | GraphQLScalarType = GraphQLString;
     readonly user: UserType = InjectType(UserType);

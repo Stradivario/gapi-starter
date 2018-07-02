@@ -1,8 +1,9 @@
-import { GapiObjectType, Resolve, Injector, GraphQLScalarType, GraphQLBoolean } from '@gapi/core';
+import { Injector } from '@rxdi/core';
+import { ObjectType, Resolve } from '@rxdi/graphql';
 import { AnotherService } from '../services/another.service';
+import { GraphQLScalarType, GraphQLBoolean } from 'graphql';
 
-
-@GapiObjectType()
+@ObjectType()
 export class UserSettings {
 
     @Injector(AnotherService) private anotherService?: AnotherService;

@@ -1,10 +1,10 @@
 
-import { GapiModule } from '@gapi/core';
-import { AuthPrivateService } from './services/auth/auth.service';
+import { Module } from '@rxdi/core';
+// import { AuthPrivateService } from './services/auth/auth.service';
 
-@GapiModule({
+@Module({
     services: [
-        AuthPrivateService
+        // AuthPrivateService
     ]
 })
 export class CoreModule {}

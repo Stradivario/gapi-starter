@@ -1,5 +1,5 @@
-import { Service } from '@gapi/core';
-import { Observable } from 'rxjs';
+import { Service } from '@rxdi/core';
+import { Observable, from } from 'rxjs';
 import { tester } from 'graphql-tester';
 
 interface Response<T> {
@@ -48,7 +48,7 @@ export class TestUtil {
                 authorization: query.signiture.token
             });
         }
-        return Observable.fromPromise(this.tester(JSON.stringify(query)));
+        return from(this.tester(JSON.stringify(query)));
     }
 
 }

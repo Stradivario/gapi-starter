@@ -1,4 +1,24 @@
 import { AppModule } from './app/app.module';
-import { Bootstrap } from '@gapi/core';
+import { BootstrapFramework } from '@rxdi/core';
+import { CoreModule } from '@gapi/core';
 
-Bootstrap(AppModule);
+BootstrapFramework(AppModule, [CoreModule], {
+    init: false,
+    initOptions: {
+        effects: true,
+        plugins: true,
+        services: true,
+        controllers: true
+    },
+    logger: {
+        logging: true,
+        date: true,
+        exitHandler: true,
+        fileService: true,
+        hashes: true
+    }
+})
+.subscribe(
+    () => console.log('Started!'),
+    (e) => console.error(e)
+);

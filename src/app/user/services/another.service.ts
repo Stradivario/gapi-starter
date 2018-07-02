@@ -1,4 +1,4 @@
-import { Service } from '@gapi/core';
+import { Service } from '@rxdi/core';
 
 @Service()
 export class AnotherService {
