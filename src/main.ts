@@ -1,9 +1,9 @@
 import { AppModule } from './app/app.module';
 import { BootstrapFramework } from '@rxdi/core';
-import { CoreModule } from '@gapi/core';
+import { FrameworkImports } from './framework-imports';
 
-BootstrapFramework(AppModule, [CoreModule], {
-    init: false,
+BootstrapFramework(AppModule, [FrameworkImports], {
+    init: true,
     initOptions: {
         effects: true,
         plugins: true,

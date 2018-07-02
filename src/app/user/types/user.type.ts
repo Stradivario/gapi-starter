@@ -1,9 +1,9 @@
 import { InjectType } from '@gapi/core';
-import { ObjectType, Resolve } from '@rxdi/graphql';
+import { GapiObjectType, Resolve } from '@rxdi/graphql';
 import { GraphQLScalarType, GraphQLInt, GraphQLString } from 'graphql';
 import { UserSettings } from './user.settings';
 
-@ObjectType()
+@GapiObjectType()
 export class UserType {
     readonly id: number | GraphQLScalarType = GraphQLInt;
     readonly email: string | GraphQLScalarType = GraphQLString;

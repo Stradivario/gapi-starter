@@ -4,7 +4,7 @@ import { GraphQLNonNull, GraphQLInt, GraphQLString } from 'graphql';
 import { UserService } from './services/user.service';
 import { UserType } from './types/user.type';
 import { UserTokenType } from './types/user-login.type';
-import { AuthPrivateService } from '../core/services/auth/auth.service';
+import { AuthService } from '../core/services/auth/auth.service';
 import { IUserType, IUserTokenType } from '../core/api-introspection/index';
 
 @Controller()
@@ -12,7 +12,7 @@ export class UserQueriesController {
 
     constructor(
         private userService: UserService,
-        private authService: AuthPrivateService
+        private authService: AuthService
     ) { }
 
     @Type(UserType)

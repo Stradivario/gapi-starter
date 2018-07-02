@@ -1,6 +1,7 @@
 
 import { Service } from '@rxdi/core';
 import * as Boom from 'boom';
+import { AuthInterface, AuthInternalService, TokenData } from '@gapi/auth';
 
 export interface UserInfo {
     scope: ['ADMIN', 'USER'];
@@ -9,17 +10,17 @@ export interface UserInfo {
 }
 
 @Service()
-export class AuthPrivateService {
+export class AuthService implements AuthInterface {
 
     constructor(
-        // private authService: AuthService,
-        // private connectionHookService: ConnectionHookService
-    ) {
-        // this.connectionHookService.modifyHooks.onSubConnection = this.onSubConnection.bind(this);
-        // this.authService.modifyFunctions.validateToken = this.validateToken.bind(this);
+        private authService: AuthInternalService
+    ) { }
+
+    onSubOperation(message, params, webSocket) {
+        return params;
     }
 
-    onSubConnection(connectionParams): UserInfo {
+    onSubConnection(connectionParams): TokenData {
         if (connectionParams.token) {
             return this.validateToken(connectionParams.token, 'Subscription');
         } else {
@@ -27,8 +28,8 @@ export class AuthPrivateService {
         }
     }
 
-    validateToken(token: string, requestType: 'Query' | 'Subscription' = 'Query'): UserInfo {
-        const user = <UserInfo>this.verifyToken(token);
+    validateToken(token: string, requestType: 'Query' | 'Subscription' = 'Query'): any {
+        const user = <any>this.authService.verifyToken(token);
         user.type = user.scope[0];
         console.log(`${requestType} from: ${JSON.stringify(user)}`);
         if (user) {
@@ -38,33 +39,29 @@ export class AuthPrivateService {
         }
     }
 
-    verifyToken(token: string): any {
-        // return this.authService.verifyToken(token);
-        return token;
+    signJWTtoken(tokenData: TokenData): string {
+        return this.authService.sign(tokenData);
     }
 
-    signJWTtoken(tokenData: any): any {
-        // return this.authService.sign(tokenData);
-        return tokenData;
+    issueJWTToken(tokenData: TokenData) {
+        const jwtToken = this.authService.sign({
+            email: '',
+            id: 1,
+            scope: ['ADMIN', 'USER']
+        });
+        return jwtToken;
     }
 
-    issueJWTToken(tokenData: any) {
-        // const jwtToken = this.authService.sign({
-        //     email: '',
-        //     id: 1,
-        //     scope: ['ADMIN', 'USER']
-        // });
-        // return jwtToken;
+    verifyToken(token: string): TokenData {
+        return this.authService.verifyToken(token);
     }
 
-    decryptPassword(password: string): any {
-        // return this.authService.decrypt(password);
-        return password;
+    decryptPassword(password: string): string {
+        return this.authService.decrypt(password);
     }
 
-    encryptPassword(password: string): any {
-        // return this.authService.encrypt(password);
-        return password;
+    encryptPassword(password: string): string {
+        return this.authService.encrypt(password);
     }
 
 }

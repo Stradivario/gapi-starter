@@ -7,6 +7,7 @@ config:
       NODE_ENV: development
       AMQP_HOST: 182.10.0.5
       AMQP_PORT: 5672
+      LOGGING: true
       GRAPHIQL: true
       GRAPHIQL_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJpZCI6MSwic2NvcGUiOlsiQURNSU4iXSwiaWF0IjoxNTIwMjkxMzkyfQ.9hpIDPkSiGvjTmUEyg_R_izW-ra2RzzLbe3Uh3IFsZg
       ENDPOINT_TESTING: http://localhost:9000/graphql
