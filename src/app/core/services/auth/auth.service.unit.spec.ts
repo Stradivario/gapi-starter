@@ -1,4 +1,4 @@
-import { Container } from '@gapi/core';
+import { Container } from '@rxdi/core';
 import { AuthPrivateService } from './auth.service';
 
 const authService: AuthPrivateService = Container.get(AuthPrivateService);

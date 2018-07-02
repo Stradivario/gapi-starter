@@ -21,6 +21,7 @@
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
+    "@gapi/cli": "^0.7.297",
     "@gapi/core": "git+https://github.com/Stradivario/gapi-core",
     "ts-node": "^5.0.1",
     "typescript": "^2.7.1"

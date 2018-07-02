@@ -40,10 +40,12 @@ export class AuthPrivateService {
 
     verifyToken(token: string): any {
         // return this.authService.verifyToken(token);
+        return token;
     }
 
     signJWTtoken(tokenData: any): any {
         // return this.authService.sign(tokenData);
+        return tokenData;
     }
 
     issueJWTToken(tokenData: any) {
@@ -57,10 +59,12 @@ export class AuthPrivateService {
 
     decryptPassword(password: string): any {
         // return this.authService.decrypt(password);
+        return password;
     }
 
     encryptPassword(password: string): any {
         // return this.authService.encrypt(password);
+        return password;
     }
 
 }

@@ -27,6 +27,7 @@ export class UserQueriesController {
     }
 
     @Type(UserTokenType)
+    @Public()
     @Query({
         email: {
             type: new GraphQLNonNull(GraphQLString)

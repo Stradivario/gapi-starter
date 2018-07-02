@@ -1,11 +1,7 @@
 import { TestUtil } from '../core/test-util/testing.service';
-import { LOGIN_QUERY_TEST } from '../core/test-util/queries/login.query';
-import { REGISTER_MUTATION } from '../core/test-util/mutations/register.mutation';
-import { FIND_USER_QUERY_TEST } from '../core/test-util/queries/findUser.query';
-import { AuthPrivateService } from '../core/services/auth/auth.service';
-import { Container } from '@gapi/core';
+import { Container } from '@rxdi/core';
 import { IQuery } from '../core/api-introspection/index';
-
+import { map } from 'rxjs/operators';
 const testUtil: TestUtil = Container.get(TestUtil);
 
 describe('User Queries Controller', () => {
@@ -29,11 +25,12 @@ describe('User Queries Controller', () => {
       variables: {
         id: 1
       }
-    })
-      .map(res => {
+    }).pipe(
+      map(res => {
         expect(res.success).toBeTruthy();
         return res.data.findUser;
-      })
+      }),
+    )
       .subscribe(async res => {
         expect(res.id).toBe(1);
         expect(res.settings.sidebar).toBeTruthy();
@@ -72,11 +69,12 @@ describe('User Queries Controller', () => {
         email: 'testing@gmail.com',
         password: '123456',
       }
-    })
-      .map(res => {
+    }).pipe(
+      map(res => {
         expect(res.success).toBeTruthy();
         return res.data.login;
       })
+    )
       .subscribe(async res => {
         expect(res.token).toBeTruthy();
         expect(res.user.email).toBe('testing@gmail.com');
@@ -91,31 +89,31 @@ describe('User Queries Controller', () => {
       });
   });
 
-//   it('e2e: query => (register) : Should sucessfully register user', async done => {
-//     const fakeUser = {
-//       name: generateName(),
-//       email: generateEmail(),
-//       password: atcTestUtil.defaultPassword
-//     };
-//     atcTestUtil.sendRequest<IMutation>({
-//       query: REGISTER_MUTATION,
-//       variables: fakeUser
-//     })
-//       .map(res => {
-//         expect(res.success).toBeTruthy();
-//         return res.data.register;
-//       })
-//       .subscribe(async res => {
-//         expect(res.name).toBeTruthy();
-//         expect(res.credential.email).toBe(fakeUser.email);
-//         expect(res.credential.password).toBe(Container.get(AuthPrivateService).encryptPassword(atcTestUtil.defaultPassword));
-//         await User.destroy({ where: { id: res.id }});
-//         await Credential.destroy({ where: { userId: res.id } });
-//         done();
-//       }, err => {
-//         expect(err).toBe(null);
-//         done();
-//       });
-//   });
+  //   it('e2e: query => (register) : Should sucessfully register user', async done => {
+  //     const fakeUser = {
+  //       name: generateName(),
+  //       email: generateEmail(),
+  //       password: atcTestUtil.defaultPassword
+  //     };
+  //     atcTestUtil.sendRequest<IMutation>({
+  //       query: REGISTER_MUTATION,
+  //       variables: fakeUser
+  //     })
+  //       .map(res => {
+  //         expect(res.success).toBeTruthy();
+  //         return res.data.register;
+  //       })
+  //       .subscribe(async res => {
+  //         expect(res.name).toBeTruthy();
+  //         expect(res.credential.email).toBe(fakeUser.email);
+  //         expect(res.credential.password).toBe(Container.get(AuthPrivateService).encryptPassword(atcTestUtil.defaultPassword));
+  //         await User.destroy({ where: { id: res.id }});
+  //         await Credential.destroy({ where: { userId: res.id } });
+  //         done();
+  //       }, err => {
+  //         expect(err).toBe(null);
+  //         done();
+  //       });
+  //   });
 
 });
