@@ -1,0 +1,30 @@
+config:
+# Application configuration
+  app:
+    local:
+      API_PORT: 9000
+      API_CERT: ./cert.key
+      NODE_ENV: development
+      AMQP_HOST: 182.10.0.5
+      AMQP_PORT: 5672
+      LOGGING: true
+      GRAPHIQL: true
+      GRAPHIQL_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJpZCI6MSwic2NvcGUiOlsiQURNSU4iXSwiaWF0IjoxNTIwMjkxMzkyfQ.9hpIDPkSiGvjTmUEyg_R_izW-ra2RzzLbe3Uh3IFsZg
+      ENDPOINT_TESTING: http://localhost:9000/graphql
+      TOKEN_TESTING: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJzY29wZSI6WyJBRE1JTiJdLCJpZCI6MSwiaWF0IjoxNTE2OTk2MzYxfQ.7ANr5VHrViD3NkCaDr0nSWYwk46UAEbOwB52pqye4AM
+
+# Testing configuration for local(dev) extending app/local configuration
+  test: 
+    local: extends app/local
+
+  schema:
+    introspectionEndpoint: http://localhost:9000/graphql
+    introspectionOutputFolder: ./src/app/core/api-introspection
+
+commands:
+
+# You can define your custom commands for example 
+# commands:
+#   your-cli:
+#     my-command: 'npm -v'
+# This command can be executed as "gapi your-cli my-command"

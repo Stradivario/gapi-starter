@@ -1,0 +1,30 @@
+{
+  "name": "adadad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "gapi start --local",
+    "test": "gapi test --local",
+    "lint": "echo"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@gapi/core": "^1.0.14"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "./src/**/*.spec.ts"
+    ],
+    "verbose": false,
+    "exec": "ts-node ./src/main.ts",
+    "watch": [
+      "./src/**/*.ts"
+    ],
+    "events": {
+      "restart": "sleep 5 && gapi schema introspect"
+    },
+    "ext": "ts"
+  }
+}
