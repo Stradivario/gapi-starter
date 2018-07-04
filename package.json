@@ -1,6 +1,6 @@
 {
-  "name": "adadad",
-  "version": "1.0.0",
+  "name": "@gapi/starter-simple",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@gapi/core": "^1.0.14"
+    "@gapi/core": "^1.0.17"
   },
   "nodemonConfig": {
     "ignore": [
