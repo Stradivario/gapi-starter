@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@gapi/core": "^1.0.33"
+    "@gapi/core": "^1.0.35"
   },
   "nodemonConfig": {
     "ignore": [
