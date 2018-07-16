@@ -1,17 +1,28 @@
 {
   "name": "@gapi/starter-simple",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm run install-ipfs-packages",
+    "install-ipfs-packages": "node ./node_modules/@rxdi/core/bin/root.js install",
     "start": "gapi start --local",
     "test": "gapi test --local",
     "lint": "echo"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Kristiyan Tachev (Stradivario)",
+  "license": "MIT",
   "dependencies": {
     "@gapi/core": "^1.0.35"
+  },
+  "peerDependencies": {
+    "@gapi/cli": "^1.0.35"
+  },
+  "ipfs": {
+    "ipfsProvider": "https://ipfs.io/ipfs/",
+    "dependencies": [
+      "QmWtJLqyokMZE37DgncpY5HhFvtFQieBzMPDQ318aJeTw6"
+    ]
   },
   "nodemonConfig": {
     "ignore": [
@@ -26,5 +37,9 @@
       "restart": "sleep 5 && gapi schema introspect"
     },
     "ext": "ts"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.9.7",
+    "typescript": "^2.9.1"
   }
 }
