@@ -13,10 +13,10 @@
   "author": "Kristiyan Tachev (Stradivario)",
   "license": "MIT",
   "dependencies": {
-    "@gapi/core": "^1.2.9"
+    "@gapi/core": "^1.2.11"
   },
   "peerDependencies": {
-    "@gapi/cli": "^1.2.9"
+    "@gapi/cli": "^1.2.11"
   },
   "ipfs": {
     "ipfsProvider": "https://ipfs.io/ipfs/",
