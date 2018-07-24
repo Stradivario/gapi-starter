@@ -1,6 +1,4 @@
-import { CoreModule } from "@gapi/core";
-import { Module } from "@gapi/core";
-
+import { Module, CoreModule } from "@gapi/core";
 
 @Module({
     imports: [

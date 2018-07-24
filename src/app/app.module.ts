@@ -1,4 +1,4 @@
-import { Module } from "@rxdi/core";
+import { Module } from "@gapi/core";
 import { AppQueriesController } from "./app.controller";
 
 @Module({

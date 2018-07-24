@@ -6,8 +6,8 @@
   "scripts": {
     "postinstall": "npm run install-ipfs-packages",
     "install-ipfs-packages": "node ./node_modules/@rxdi/core/bin/root.js install",
-    "start": "gapi start --local",
-    "test": "gapi test --local",
+    "start": "./node_modules/.bin/gapi start --local",
+    "test": "./node_modules/.bin/gapi test --local",
     "lint": "echo"
   },
   "author": "Kristiyan Tachev (Stradivario)",
@@ -18,12 +18,14 @@
   "peerDependencies": {
     "@gapi/cli": "^1.2.13"
   },
-  "ipfs": {
-    "ipfsProvider": "https://ipfs.io/ipfs/",
-    "dependencies": [
-      "QmWtJLqyokMZE37DgncpY5HhFvtFQieBzMPDQ318aJeTw6"
-    ]
-  },
+  "ipfs": [
+    {
+      "provider": "https://ipfs.io/ipfs/",
+      "dependencies": [
+        "QmWtJLqyokMZE37DgncpY5HhFvtFQieBzMPDQ318aJeTw6"
+      ]
+    }
+  ],
   "nodemonConfig": {
     "ignore": [
       "./src/**/*.spec.ts"
