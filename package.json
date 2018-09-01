@@ -1,6 +1,6 @@
 {
   "name": "@gapi/starter-simple",
-  "version": "1.2.41",
+  "version": "1.2.43",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "Kristiyan Tachev (Stradivario)",
   "license": "MIT",
   "dependencies": {
-    "@gapi/core": "^1.2.40"
+    "@gapi/core": "^1.2.43"
   },
   "ipfs": [
     {
@@ -39,6 +39,6 @@
   },
   "devDependencies": {
     "typescript": "^3.0.1",
-    "@gapi/cli": "^1.2.40"
+    "@gapi/cli": "^1.2.43"
   }
 }
