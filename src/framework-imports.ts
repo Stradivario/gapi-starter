@@ -5,7 +5,27 @@ import { Module, CoreModule } from "@gapi/core";
         CoreModule.forRoot({
             server: {
                 hapi: {
-                    port: process.env.API_PORT || process.env.PORT || 9000
+                    port: process.env.API_PORT || process.env.PORT || 9000,
+                    routes: {
+                        cors: {
+                            origin: ['*'],
+                            additionalHeaders: [
+                                'Host',
+                                'User-Agent',
+                                'Accept',
+                                'Accept-Language',
+                                'Accept-Encoding',
+                                'Access-Control-Request-Method',
+                                'Access-Control-Allow-Origin',
+                                'Access-Control-Request-Headers',
+                                'Origin',
+                                'Connection',
+                                'Pragma',
+                                'Cache-Control'
+                            ]
+                        }
+                    }
+
                 }
             },
             graphql: {
