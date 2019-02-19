@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm run install-ipfs-packages",
     "install-ipfs-packages": "node ./node_modules/@rxdi/core/bin/root.js install",
-    "start": "./node_modules/.bin/gapi start --local",
-    "test": "./node_modules/.bin/gapi test --local",
+    "start": "gapi start --local --lint",
+    "test": "gapi test --local",
     "lint": "echo"
   },
   "author": "Kristiyan Tachev (Stradivario)",
