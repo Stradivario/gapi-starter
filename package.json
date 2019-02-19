@@ -13,7 +13,7 @@
   "author": "Kristiyan Tachev (Stradivario)",
   "license": "MIT",
   "dependencies": {
-    "@gapi/core": "^1.4.38"
+    "@gapi/core": "^1.4.40"
   },
   "ipfs": [
     {
@@ -39,6 +39,6 @@
   },
   "devDependencies": {
     "typescript": "^3.0.1",
-    "@gapi/cli": "^1.4.38"
+    "@gapi/cli": "^1.4.40"
   }
 }
