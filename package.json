@@ -21,9 +21,9 @@
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
-    "@gapi/cli": "^1.4.45",
-    "@gapi/auth": "^1.4.45",
-    "@gapi/core": "^1.4.45"
+    "@gapi/cli": "^1.4.47",
+    "@gapi/auth": "^1.4.47",
+    "@gapi/core": "^1.4.47"
   },
   "devDependencies": {
     "@types/jest": "^22.2.0",
