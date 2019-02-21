@@ -13,7 +13,7 @@ export class UserEffect {
     ) {}
 
     @OfType<EffectTypes>(EffectTypes.findUser)
-    findUser(result: UserType, { id }, context: UserInfo) {
+    findUser(result: UserType, { id }, context: { user: UserInfo }) {
         this.pubSub.publish('CREATE_SIGNAL_BASIC', {hello: 'World!'});
         console.log(result, id, context);
     }

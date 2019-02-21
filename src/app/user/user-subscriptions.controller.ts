@@ -28,7 +28,7 @@ export class UserSubscriptionsController {
         withFilter(
             (self: UserSubscriptionsController) => self.pubsub.asyncIterator('CREATE_SIGNAL_WITH_FILTER'),
             (payload, {id}, context) => {
-                console.log('Subscribed User: ', id, JSON.stringify(context));
+                console.log('Subscribed User: ', id, JSON.stringify(context.user));
                 return true;
             }
         )
