@@ -1,11 +1,33 @@
-import { Controller } from '@rxdi/core';
-import { Type, Query, Public } from '@rxdi/graphql';
-import { GraphQLNonNull, GraphQLInt, GraphQLString } from 'graphql';
+import { Controller, Service } from '@rxdi/core';
+import { Type, Query, Public, GenericGapiResolversType, InterceptResolver, Interceptor } from '@rxdi/graphql';
+import { GraphQLNonNull, GraphQLInt, GraphQLString,  } from 'graphql';
 import { UserService } from './services/user.service';
 import { UserType } from './types/user.type';
 import { UserTokenType } from './types/user-login.type';
 import { AuthService } from '../core/services/auth/auth.service';
 import { IUserType, IUserTokenType } from '../core/api-introspection/index';
+import { Observable } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
+
+@Service()
+export class LoggerInterceptor implements InterceptResolver {
+    intercept(
+        chainable$: Observable<UserType>,
+        context: UserType,
+        payload,
+        descriptor: GenericGapiResolversType
+    ) {
+        console.log('Before...');
+        const now = Date.now();
+        return chainable$.pipe(
+            tap(() => console.log(`After... ${Date.now() - now}ms`)),
+            map(res => {
+                res.email = 'dadadada';
+                return res;
+            })
+        );
+    }
+}
 
 @Controller()
 export class UserQueriesController {
@@ -16,6 +38,7 @@ export class UserQueriesController {
     ) { }
 
     @Type(UserType)
+    @Interceptor(LoggerInterceptor)
     @Public()
     @Query({
         id: {
@@ -23,6 +46,7 @@ export class UserQueriesController {
         }
     })
     findUser(root, { id }, context): IUserType {
+        console.log(this);
         return this.userService.findUser(id);
     }
 
