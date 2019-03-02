@@ -23,8 +23,15 @@
   */
   export interface IQuery {
     __typename?: "Query";
+    initQuery: IInitQueryType | null;
     findUser: IUserType | null;
     login: IUserTokenType | null;
+}
+
+  
+  export interface IInitQueryType {
+    __typename?: "initQueryType";
+    status: string | null;
 }
 
   
@@ -69,7 +76,7 @@
 }
 
   /**
-    description: Subscription type for all rabbitmq subscriptions via pub sub
+    description: Subscription type for all subscriptions via pub sub
   */
   export interface ISubscription {
     __typename?: "Subscription";
