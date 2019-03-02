@@ -1,6 +1,6 @@
 {
   "name": "@gapi/starter-basic",
-  "version": "1.4.62",
+  "version": "1.4.58",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,13 +16,16 @@
     "pretest": "npm run lint",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "test": "gapi test",
-    "test-watch": "gapi test --watch"
+    "test-watch": "gapi test --watch",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
     "@gapi/auth": "^1.4.61",
-    "@gapi/core": "^1.4.61"
+    "@gapi/core": "^1.4.61",
+    "snyk": "^1.135.1"
   },
   "devDependencies": {
     "@types/graphql": "^14.0.7",
@@ -72,5 +75,6 @@
     "testRegex": "/src/.*\\.spec.(ts|tsx|js)$",
     "verbose": true,
     "collectCoverage": true
-  }
+  },
+  "snyk": true
 }
