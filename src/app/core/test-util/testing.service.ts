@@ -48,7 +48,7 @@ export class TestUtil {
                 authorization: query.signiture.token
             });
         }
-        return from(this.tester(JSON.stringify(query)));
+        return <any>from(this.tester(JSON.stringify(query)));
     }
 
 }
