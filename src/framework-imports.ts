@@ -45,11 +45,12 @@ import { readFileSync } from 'fs';
             },
             graphql: {
                 path: '/graphql',
+                initQuery: true,
                 openBrowser: true,
                 watcherPort: 8967,
                 writeEffects: true,
-                graphiql: false,
-                graphiQlPlayground: true,
+                graphiql: true,
+                graphiQlPlayground: false,
                 graphiQlPath: '/graphiql',
                 authentication: AuthService,
                 graphiqlOptions: {
