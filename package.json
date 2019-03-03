@@ -1,12 +1,12 @@
 {
   "name": "@gapi/starter-basic",
-  "version": "1.4.62",
+  "version": "1.4.63",
   "description": "",
   "main": "index.js",
   "scripts": {
     "postpublish": "git push -f ssh://git@gitlab.youvolio.com:522/gapi/gapi-starter.git && git push --tags && git push ssh://git@gitlab.youvolio.com:522/gapi/gapi-starter.git --tags",
     "start": "gapi start --local --lint",
-    "build":"gapi build",
+    "build": "gapi build",
     "start:prod": "gapi start --prod",
     "stop:prod": "gapi stop --prod",
     "start:docker": "gapi app start",
