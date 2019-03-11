@@ -4,7 +4,7 @@ import { UserQueriesController } from './user-queries.controller';
 import { UserSubscriptionsController } from './user-subscriptions.controller';
 import { UserMutationsController } from './user-mutations.controller';
 import { UserService } from './services/user.service';
-import { AnotherService } from './services/another.service';
+// import { AnotherService } from './services/another.service';
 import { UserEffect } from './user.effect';
 
 @Module({
@@ -15,7 +15,7 @@ import { UserEffect } from './user.effect';
     ],
     services: [
         UserService,
-        AnotherService
+        // AnotherService
     ],
     effects: [
         UserEffect

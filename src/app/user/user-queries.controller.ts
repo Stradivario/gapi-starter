@@ -62,7 +62,7 @@ export class UserQueriesController {
     })
     login(root, { email, password }, context) {
         let credential: IUserTokenType;
-
+        console.log('AAAAA', this);
         // Find user from database
         const user = <IUserType>{
             id: 1,

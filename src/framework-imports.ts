@@ -52,7 +52,7 @@ import { readFileSync } from 'fs';
                 graphiql: true,
                 graphiQlPlayground: false,
                 graphiQlPath: '/graphiql',
-                authentication: AuthService,
+                // authentication: AuthService,
                 graphiqlOptions: {
                     endpointURL: '/graphql',
                     passHeader: `'Authorization':'${process.env.GRAPHIQL_TOKEN}'`,
