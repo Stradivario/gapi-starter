@@ -23,7 +23,7 @@ import { ResponseToolkit, Request } from 'hapi';
             provide: ON_REQUEST_HANDLER,
             deps: [AuthService, GRAPHQL_PLUGIN_CONFIG],
             useFactory: (auth: AuthService, config: GRAPHQL_PLUGIN_CONFIG) =>
-                async (next, context, request: Request, h: ResponseToolkit, err: Error) => {
+                async (next, request: Request, h: ResponseToolkit, err: Error) => {
                     if (request.headers.authorization && request.headers.authorization !== 'undefined') {
                         try {
                             config.graphqlOptions.context = await auth.validateToken(request.headers.authorization);
