@@ -22,12 +22,12 @@
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
-    "@gapi/auth": "^1.5.18",
-    "@gapi/core": "^1.5.18",
+    "@gapi/auth": "^1.5.20",
+    "@gapi/core": "^1.5.20",
     "@types/hapi": "^18.0.1"
   },
   "devDependencies": {
-    "@gapi/cli": "^1.5.18",
+    "@gapi/cli": "^1.5.20",
     "@types/graphql": "^14.0.7",
     "@types/jest": "^24.0.9",
     "@types/node": "^11.10.4",
