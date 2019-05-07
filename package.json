@@ -1,10 +1,9 @@
 {
   "name": "@gapi/starter-simple",
-  "version": "1.6.20",
+  "version": "1.6.21",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install-ipfs-packages": "node ./node_modules/@rxdi/core/bin/root.js install",
     "start": "gapi start --local --lint",
     "test": "gapi test --local",
     "lint": "echo"
@@ -14,30 +13,7 @@
   "dependencies": {
     "@gapi/core": "^1.6.20"
   },
-  "ipfs": [
-    {
-      "provider": "https://ipfs.io/ipfs/",
-      "dependencies": [
-        "QmWtJLqyokMZE37DgncpY5HhFvtFQieBzMPDQ318aJeTw6"
-      ]
-    }
-  ],
-  "nodemonConfig": {
-    "ignore": [
-      "./src/**/*.spec.ts"
-    ],
-    "verbose": false,
-    "exec": "ts-node ./src/main.ts",
-    "watch": [
-      "./src/**/*.ts"
-    ],
-    "events": {
-      "restart": "sleep 5 && gapi schema introspect"
-    },
-    "ext": "ts"
-  },
   "devDependencies": {
-    "typescript": "^3.0.1",
-    "@gapi/cli": "^1.6.20"
+    "typescript": "^3.4.5"
   }
 }
