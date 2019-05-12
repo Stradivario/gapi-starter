@@ -1,7 +1,10 @@
-import { GapiObjectType } from '@rxdi/graphql';
-import { GraphQLScalarType, GraphQLString } from 'graphql';
+import { GraphQLString, GraphQLObjectType } from 'graphql';
 
-@GapiObjectType()
-export class UserMessage {
-    readonly message: string | GraphQLScalarType = GraphQLString;
-}
+export const UserMessage = new GraphQLObjectType({
+  name: 'UserMessage',
+  fields: () => ({
+    message: {
+      type: GraphQLString
+    }
+  })
+});

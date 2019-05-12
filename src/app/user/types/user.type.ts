@@ -1,19 +1,27 @@
-import { InjectType } from '@gapi/core';
-import { GapiObjectType, Resolve } from '@rxdi/graphql';
-import { GraphQLScalarType, GraphQLInt, GraphQLString } from 'graphql';
+import { GraphQLInt, GraphQLString, GraphQLObjectType } from 'graphql';
 import { UserSettings } from './user.settings';
 
-@GapiObjectType()
-export class UserType {
-    readonly id: number | GraphQLScalarType = GraphQLInt;
-    email: string | GraphQLScalarType = GraphQLString;
-    type: string | GraphQLScalarType =  GraphQLString;
-    password: string | GraphQLScalarType =  GraphQLString;
-    name: string | GraphQLScalarType =  GraphQLString;
-    settings: UserSettings = InjectType(UserSettings);
-
-    @Resolve('id')
-    getId?(root, payload, context) {
-        return 1;
+export const UserType = new GraphQLObjectType({
+  name: 'UserType',
+  fields: () => ({
+    id: {
+      type: GraphQLInt,
+      resolve: () => 1
+    },
+    email: {
+      type: GraphQLString
+    },
+    type: {
+      type: GraphQLString
+    },
+    password: {
+      type: GraphQLString
+    },
+    name: {
+      type: GraphQLString
+    },
+    settings: {
+      type: UserSettings
     }
-}
+  })
+});

@@ -1,18 +1,13 @@
-import { Injector } from '@rxdi/core';
-import { GapiObjectType, Resolve } from '@rxdi/graphql';
+import { Container } from '@rxdi/core';
 import { AnotherService } from '../services/another.service';
-import { GraphQLScalarType, GraphQLBoolean } from 'graphql';
+import { GraphQLBoolean, GraphQLObjectType } from 'graphql';
 
-@GapiObjectType()
-export class UserSettings {
-
-    @Injector(AnotherService) private anotherService?: AnotherService;
-
-    readonly sidebar: boolean | GraphQLScalarType = GraphQLBoolean;
-
-    @Resolve('sidebar')
-    async getSidebar?(root, payload, context) {
-        return await this.anotherService.returnTrueAsync();
+export const UserSettings = new GraphQLObjectType({
+  name: 'UserSettings',
+  fields: () => ({
+    sidebar: {
+      type: GraphQLBoolean,
+      resolve: async () => await Container.get(AnotherService).returnTrueAsync()
     }
-
-}
+  })
+});

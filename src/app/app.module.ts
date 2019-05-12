@@ -3,9 +3,6 @@ import { UserModule } from './user/user.module';
 import { CoreModule } from './core/core.module';
 
 @Module({
-    imports: [
-        UserModule,
-        CoreModule
-    ]
+  imports: [UserModule, CoreModule]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,4 +1,3 @@
-
 import { Module } from '@rxdi/core';
 import { UserQueriesController } from './user-queries.controller';
 import { UserSubscriptionsController } from './user-subscriptions.controller';
@@ -8,17 +7,15 @@ import { UserService } from './services/user.service';
 import { UserEffect } from './user.effect';
 
 @Module({
-    controllers: [
-        UserQueriesController,
-        UserSubscriptionsController,
-        UserMutationsController
-    ],
-    services: [
-        UserService,
-        // AnotherService
-    ],
-    effects: [
-        UserEffect
-    ]
+  controllers: [
+    UserQueriesController,
+    UserSubscriptionsController,
+    UserMutationsController
+  ],
+  services: [
+    UserService
+    // AnotherService
+  ],
+  effects: [UserEffect]
 })
 export class UserModule {}

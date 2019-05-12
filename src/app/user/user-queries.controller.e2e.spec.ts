@@ -1,14 +1,53 @@
-import { TestUtil } from '../core/test-util/testing.service';
-import { Container } from '@rxdi/core';
+import { Container, createTestBed } from '@rxdi/core';
 import { IQuery } from '../core/api-introspection/index';
 import { map } from 'rxjs/operators';
-const testUtil: TestUtil = Container.get(TestUtil);
+import { UserQueriesController } from './user-queries.controller';
+import { UserMutationsController } from './user-mutations.controller';
+import {
+  HapiModule,
+  GraphQLModule,
+  setConfigServer,
+  setConfigGraphql,
+  HAPI_SERVER,
+  sendRequest
+} from '@gapi/core';
+import { Server } from 'hapi';
+import { from } from 'rxjs';
+import { CoreModule } from '../core/core.module';
+import { AuthModule } from '@gapi/auth';
+import { readFileSync } from 'fs';
 
 describe('User Queries Controller', () => {
+  beforeAll(async () => {
+    await createTestBed(
+      {
+        imports: [
+          CoreModule,
+          AuthModule.forRoot({
+            algorithm: 'HS256',
+            cert: readFileSync('./cert.key'),
+            cyper: {
+              algorithm: 'aes256',
+              iv: 'Jkyt1H3FA8JK9L3B',
+              privateKey: '8zTVzr3p53VC12jHV54rIYu2545x47lA'
+            }
+          })
+        ],
+        controllers: [UserQueriesController, UserMutationsController]
+      },
+      [
+        HapiModule.forRoot(setConfigServer()),
+        GraphQLModule.forRoot(setConfigGraphql())
+      ]
+    ).toPromise();
+  });
+
+  afterAll(async () => await Container.get<Server>(HAPI_SERVER).stop());
 
   it('e2e: queries => (findUser) : Should sucessfully find user', async done => {
-    testUtil.sendRequest<IQuery>({
-      query: `
+    from(
+      sendRequest<IQuery>({
+        query: `
       query findUser($id: Int!) {
         findUser(id: $id) {
           id
@@ -22,33 +61,38 @@ describe('User Queries Controller', () => {
         }
       }
     `,
-      variables: {
-        id: 1
-      }
-    }).pipe(
-      map(res => {
-        expect(res.success).toBeTruthy();
-        return res.data.findUser;
-      }),
+        variables: {
+          id: 1
+        }
+      })
     )
-      .subscribe(async res => {
-        expect(res.id).toBe(1);
-        expect(res.settings.sidebar).toBeTruthy();
-        expect(res.email).toBeTruthy();
-        expect(res.name).toBeTruthy();
-        expect(res.password).toBeTruthy();
-        expect(res.type).toBe('ADMIN');
-        done();
-      }, err => {
-        expect(err).toBe(null);
-        done();
-      });
+      .pipe(
+        map(res => {
+          expect(res.success).toBeTruthy();
+          return res.data.findUser;
+        })
+      )
+      .subscribe(
+        async res => {
+          expect(res.id).toBe(1);
+          expect(res.settings.sidebar).toBeTruthy();
+          expect(res.email).toBeTruthy();
+          expect(res.name).toBeTruthy();
+          expect(res.password).toBeTruthy();
+          expect(res.type).toBe('ADMIN');
+          done();
+        },
+        err => {
+          expect(err).toBe(null);
+          done();
+        }
+      );
   });
 
-
   it('e2e: queries => (loginUser) : Should sucessfully login user and return JWT Token', async done => {
-    testUtil.sendRequest<IQuery>({
-      query: `
+    from(
+      sendRequest<IQuery>({
+        query: `
         query login($email:String!, $password:String!) {
           login(email: $email, password: $password) {
             token
@@ -65,55 +109,32 @@ describe('User Queries Controller', () => {
           }
         }
       `,
-      variables: {
-        email: 'testing@gmail.com',
-        password: '123456',
-      }
-    }).pipe(
-      map(res => {
-        expect(res.success).toBeTruthy();
-        return res.data.login;
+        variables: {
+          email: 'testing@gmail.com',
+          password: '123456'
+        }
       })
     )
-      .subscribe(async res => {
-        expect(res.token).toBeTruthy();
-        expect(res.user.email).toBe('testing@gmail.com');
-        expect(res.user.name).toBeTruthy();
-        expect(res.user.password).toBeTruthy();
-        expect(res.user.type).toBe('ADMIN');
-        expect(res.token).toBeTruthy();
-        done();
-      }, err => {
-        expect(err).toBe(null);
-        done();
-      });
+      .pipe(
+        map(res => {
+          expect(res.success).toBeTruthy();
+          return res.data.login;
+        })
+      )
+      .subscribe(
+        async res => {
+          expect(res.token).toBeTruthy();
+          expect(res.user.email).toBe('testing@gmail.com');
+          expect(res.user.name).toBeTruthy();
+          expect(res.user.password).toBeTruthy();
+          expect(res.user.type).toBe('ADMIN');
+          expect(res.token).toBeTruthy();
+          done();
+        },
+        err => {
+          expect(err).toBe(null);
+          done();
+        }
+      );
   });
-
-  //   it('e2e: query => (register) : Should sucessfully register user', async done => {
-  //     const fakeUser = {
-  //       name: generateName(),
-  //       email: generateEmail(),
-  //       password: atcTestUtil.defaultPassword
-  //     };
-  //     atcTestUtil.sendRequest<IMutation>({
-  //       query: REGISTER_MUTATION,
-  //       variables: fakeUser
-  //     })
-  //       .map(res => {
-  //         expect(res.success).toBeTruthy();
-  //         return res.data.register;
-  //       })
-  //       .subscribe(async res => {
-  //         expect(res.name).toBeTruthy();
-  //         expect(res.credential.email).toBe(fakeUser.email);
-  //         expect(res.credential.password).toBe(Container.get(AuthPrivateService).encryptPassword(atcTestUtil.defaultPassword));
-  //         await User.destroy({ where: { id: res.id }});
-  //         await Credential.destroy({ where: { userId: res.id } });
-  //         done();
-  //       }, err => {
-  //         expect(err).toBe(null);
-  //         done();
-  //       });
-  //   });
-
 });

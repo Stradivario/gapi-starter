@@ -1,11 +1,11 @@
 {
   "name": "@gapi/starter-basic",
-  "version": "1.6.24",
+  "version": "1.6.25",
   "description": "",
   "main": "index.js",
   "scripts": {
     "postpublish": "git push -f ssh://git@gitlab.youvolio.com:522/gapi/gapi-starter.git && git push --tags && git push ssh://git@gitlab.youvolio.com:522/gapi/gapi-starter.git --tags",
-    "start": "gapi start --local --lint",
+    "start": "gapi start --local --lint --minify=false",
     "build": "gapi build",
     "start:prod": "gapi start --prod",
     "stop:prod": "gapi stop --prod",
@@ -31,11 +31,10 @@
     "@types/graphql": "^14.0.7",
     "@types/jest": "^24.0.9",
     "@types/node": "^11.10.4",
-    "jest": "^24.1.0",
-    "jest-cli": "^24.1.0",
-    "ts-jest": "^24.0.0",
+    "jest": "^24.8.0",
+    "jest-cli": "^24.8.0",
+    "ts-jest": "^24.0.2",
     "ts-lint": "^4.5.1",
-    "ts-node": "^8.0.2",
     "typescript": "3.3.3333"
   },
   "nodemonConfig": {
@@ -70,7 +69,7 @@
       "__DEV__": true
     },
     "transform": {
-      "\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
+      "\\.(ts|tsx)$": "ts-jest"
     },
     "testRegex": "/src/.*\\.spec.(ts|tsx|js)$",
     "verbose": true,

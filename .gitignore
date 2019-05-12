@@ -5,10 +5,11 @@
 /tmp
 /out-tsc
 /prod
-
+/.cache
+/dist
 # dependencies
 /node_modules
-
+/coverage
 # IDEs and editors
 /.idea
 .project
