@@ -48,8 +48,8 @@ import { readFileSync } from 'fs';
         openBrowser: true,
         watcherPort: 8967,
         writeEffects: true,
-        graphiql: true,
-        graphiQlPlayground: false,
+        authentication: AuthService,
+        graphiQlPlayground: true,
         graphiQlPath: '/graphiql',
         graphiqlOptions: {
           endpointURL: '/graphql',

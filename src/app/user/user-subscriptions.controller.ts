@@ -8,7 +8,11 @@ import { IUserMessage } from '../core/api-introspection';
 
 @Controller()
 export class UserSubscriptionsController {
-  constructor(private pubsub: PubSubService) {}
+  constructor(private pubsub: PubSubService) {
+    setInterval(() => {
+      this.pubsub.publish('CREATE_SIGNAL_BASIC', 'dadadadada');
+    }, 1000);
+  }
 
   @Scope('ADMIN')
   @Type(UserMessage)

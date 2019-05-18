@@ -17,8 +17,8 @@ export class AuthService implements AuthInterface {
   }
 
   onSubConnection(connectionParams): TokenData {
-    if (connectionParams.token) {
-      return this.validateToken(connectionParams.token, 'Subscription');
+    if (connectionParams.authorization) {
+      return this.validateToken(connectionParams.authorization, 'Subscription');
     } else {
       throw Boom.unauthorized();
     }
