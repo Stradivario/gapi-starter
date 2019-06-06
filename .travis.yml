@@ -1,4 +1,5 @@
 before_script:
+  - npm i -g @gapi/cli
   - npm install
 script: npm start & npm test
 env:

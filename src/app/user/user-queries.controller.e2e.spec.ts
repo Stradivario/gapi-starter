@@ -9,7 +9,8 @@ import {
   setConfigServer,
   setConfigGraphql,
   HAPI_SERVER,
-  sendRequest
+  sendRequest,
+  GraphQLPubSubModule
 } from '@gapi/core';
 import { Server } from 'hapi';
 import { from } from 'rxjs';
@@ -37,7 +38,8 @@ describe('User Queries Controller', () => {
       },
       [
         HapiModule.forRoot(setConfigServer()),
-        GraphQLModule.forRoot(setConfigGraphql())
+        GraphQLModule.forRoot(setConfigGraphql()),
+        GraphQLPubSubModule.forRoot()
       ]
     ).toPromise();
   });

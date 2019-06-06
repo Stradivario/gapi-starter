@@ -1,6 +1,6 @@
 {
   "name": "@gapi/starter-basic",
-  "version": "1.6.33",
+  "version": "1.7.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,6 @@
     "@types/hapi": "^18.0.1"
   },
   "devDependencies": {
-    "@gapi/cli": "^1.6.32",
     "@types/graphql": "^14.0.7",
     "@types/jest": "^24.0.9",
     "@types/node": "^11.10.4",
@@ -35,7 +34,7 @@
     "jest-cli": "^24.8.0",
     "ts-jest": "^24.0.2",
     "ts-lint": "^4.5.1",
-    "typescript": "^3.5.0-rc"
+    "typescript": "^3.5.1"
   },
   "nodemonConfig": {
     "ignore": [
