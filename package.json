@@ -17,14 +17,17 @@
     "pretest": "npm run lint",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "test": "gapi test",
-    "test-watch": "gapi test --watch"
+    "test-watch": "gapi test --watch",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
     "@gapi/auth": "^1.7.5",
     "@gapi/core": "^1.7.5",
-    "@types/hapi": "^18.0.1"
+    "@types/hapi": "^18.0.1",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "@types/graphql": "^14.0.7",
@@ -73,5 +76,6 @@
     "testRegex": "/src/.*\\.spec.(ts|tsx|js)$",
     "verbose": true,
     "collectCoverage": true
-  }
+  },
+  "snyk": true
 }
