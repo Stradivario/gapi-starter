@@ -11,7 +11,7 @@
   "author": "Kristiyan Tachev (Stradivario)",
   "license": "MIT",
   "dependencies": {
-    "@gapi/core": "^1.8.6"
+    "@gapi/core": "^1.8.8"
   },
   "devDependencies": {
     "typescript": "^3.4.5"
