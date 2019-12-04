@@ -1,6 +1,6 @@
 {
   "name": "@gapi/starter-simple",
-  "version": "1.8.19",
+  "version": "1.8.20",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@gapi/core": "^1.8.18",
-    "graphql":"^14.5.8"
+    "graphql": "^14.5.8"
   },
   "devDependencies": {
     "@types/graphql": "^14.5.0",
