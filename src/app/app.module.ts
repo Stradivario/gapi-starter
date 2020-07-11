@@ -1,7 +1,8 @@
-import { Module } from "@gapi/core";
-import { AppQueriesController } from "./app.controller";
+import { Module } from '@rxdi/core';
+import { UserModule } from './user/user.module';
+import { CoreModule } from './core/core.module';
 
 @Module({
-    controllers: [AppQueriesController]
+  imports: [UserModule, CoreModule]
 })
-export class AppModule { }
+export class AppModule {}

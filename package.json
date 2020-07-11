@@ -1,21 +1,79 @@
 {
-  "name": "@gapi/starter-simple",
+  "name": "@gapi/starter-basic",
   "version": "1.8.23",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gapi start --local --lint",
-    "test": "gapi test --local",
-    "lint": "echo"
+    "postpublish": "git push -f ssh://git@gitlab.youvolio.com:522/gapi/gapi-starter.git && git push --tags && git push ssh://git@gitlab.youvolio.com:522/gapi/gapi-starter.git --tags",
+    "start": "gapi start --local --lint --minify=false",
+    "build": "gapi build",
+    "start:prod": "gapi start --prod",
+    "stop:prod": "gapi stop --prod",
+    "start:docker": "gapi app start",
+    "stop:docker": "gapi app stop",
+    "build:docker": "gapi app build",
+    "start:workers": "gapi workers start",
+    "stop:workers": "gapi workers stop",
+    "pretest": "npm run lint",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
+    "test": "gapi test",
+    "test-watch": "gapi test --watch"
   },
-  "author": "Kristiyan Tachev (Stradivario)",
+  "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
+    "@gapi/auth": "^1.8.22",
     "@gapi/core": "^1.8.22",
-    "graphql": "^14.5.8"
+    "graphql": "^14.5.8",
+    "@types/hapi": "^18.0.1"
   },
   "devDependencies": {
+    "@gapi/cli": "^1.8.22",
     "@types/graphql": "^14.5.0",
-    "typescript": "^3.4.5"
+    "@types/jest": "^24.0.9",
+    "@types/node": "^11.10.4",
+    "jest": "^24.8.0",
+    "jest-cli": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "ts-lint": "^4.5.1",
+    "typescript": "^3.5.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "./src/**/*.spec.ts"
+    ],
+    "verbose": false,
+    "exec": "ts-node ./src/main.ts",
+    "watch": [
+      "./src/**/*.ts"
+    ],
+    "ext": "ts"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "html"
+    ],
+    "rootDir": "./",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json",
+      "node"
+    ],
+    "globals": {
+      "__DEV__": true
+    },
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    },
+    "testRegex": "/src/.*\\.spec.(ts|tsx|js)$",
+    "verbose": true,
+    "collectCoverage": true
   }
 }

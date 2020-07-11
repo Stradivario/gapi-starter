@@ -23,39 +23,21 @@
   */
   export interface IQuery {
     __typename?: "Query";
-    initQuery: IInitQueryType | null;
     findUser: IUserType | null;
-    login: IUserTokenType | null;
-}
-
-  
-  export interface IInitQueryType {
-    __typename?: "initQueryType";
-    status: string | null;
 }
 
   
   export interface IUserType {
     __typename?: "UserType";
     id: number | null;
-    email: string | null;
-    type: string | null;
-    password: string | null;
-    name: string | null;
     settings: IUserSettings | null;
 }
 
   
   export interface IUserSettings {
     __typename?: "UserSettings";
-    sidebar: boolean | null;
-}
-
-  
-  export interface IUserTokenType {
-    __typename?: "UserTokenType";
-    token: string | null;
-    user: IUserType | null;
+    username: string | null;
+    firstname: string | null;
 }
 
   /**
@@ -76,7 +58,7 @@
 }
 
   /**
-    description: Subscription type for all subscriptions via pub sub
+    description: Subscription type for all rabbitmq subscriptions via pub sub
   */
   export interface ISubscription {
     __typename?: "Subscription";
